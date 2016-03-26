@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.Adapter;
+package com.locusideas.locusideas.adapter;
 import android.support.v4.view.PagerAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;

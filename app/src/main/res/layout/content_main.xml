@@ -39,6 +39,7 @@
             android:textStyle="normal"
             android:textSize="18dp"
             android:textColor="#ffffff"
+            android:onClick="openSignInActivity"
             android:theme="@style/AppTheme.PopupOverlay" />
 
         <View
