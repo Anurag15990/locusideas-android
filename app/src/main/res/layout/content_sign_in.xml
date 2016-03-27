@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/signinEmailText"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:hint="Email" />
@@ -44,27 +44,28 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText2"
+            android:id="@+id/signInPasswordText"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:hint="Password" />
 
         <TextView
-            android:layout_width="139dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="FORGOT PASSWORD?"
-            android:id="@+id/textView"
+            android:id="@+id/forgotPassword"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textStyle="bold" />
+            android:textStyle="normal"
+            android:textAlignment="center" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SIGN IN"
-            android:id="@+id/button"
+            android:id="@+id/signInActivityButton"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="#049e8f"
             android:textColor="#ffffff" />
 
@@ -72,7 +73,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_height="30dp"
             android:weightSum="1">
 
@@ -90,7 +91,7 @@
                 android:text="or sign in with"
                 android:layout_weight="0.5"
                 android:textAlignment="center"
-                android:id="@+id/textView2" />
+                android:id="@+id/orSignInWithText" />
 
             <View
                 android:layout_marginLeft="0dp"
@@ -115,10 +116,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Facebook"
-                android:id="@+id/button2"
+                android:id="@+id/signInFacebookButton"
                 android:layout_weight="0.33"
                 android:layout_marginTop="10dp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#9f9d9d" />
 
             <Space
                 android:layout_width="0dp"
@@ -129,10 +131,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Twitter"
-                android:id="@+id/button3"
+                android:id="@+id/signInTwitterButton"
                 android:layout_weight="0.33"
                 android:layout_marginTop="10dp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#9f9d9d" />
 
         </LinearLayout>
     </LinearLayout>

@@ -37,7 +37,7 @@
             android:id="@+id/signInButton"
             android:layout_weight="1"
             android:textStyle="normal"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:textColor="#ffffff"
             android:onClick="openSignInActivity"
             android:theme="@style/AppTheme.PopupOverlay" />
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:textColor="#ffffff"
             android:onClick="openSignUpActivity"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:theme="@style/AppTheme.PopupOverlay" />
 
     </LinearLayout>

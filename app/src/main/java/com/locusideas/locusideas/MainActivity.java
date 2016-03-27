@@ -1,12 +1,14 @@
 package com.locusideas.locusideas;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.locusideas.locusideas.adapter.CustomPagerAdapter;
 import com.locusideas.locusideas.auth.SignInActivity;
@@ -33,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        setTypeFaceForActivity();
+    }
+
+
+    public void setTypeFaceForActivity() {
+        Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-ExtraBold.otf");
+
+        Button signUpButton = (Button) findViewById(R.id.signUpButton);
+        signUpButton.setTypeface(buttonFont);
+
+        Button signInButton = (Button) findViewById(R.id.signInButton);
+        signInButton.setTypeface(buttonFont);
     }
 
     @Override
