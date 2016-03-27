@@ -9,13 +9,12 @@ import android.view.View;
 
 import com.locusideas.locusideas.R;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_up);
     }
 
-    //TODO: Change Facebook & Twitter Buttons
 }

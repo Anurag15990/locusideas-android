@@ -58,6 +58,7 @@
             android:id="@+id/signUpButton"
             android:layout_weight="1"
             android:textColor="#ffffff"
+            android:onClick="openSignUpActivity"
             android:textSize="18dp"
             android:theme="@style/AppTheme.PopupOverlay" />
 

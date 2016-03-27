@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.locusideas.locusideas.adapter.CustomPagerAdapter;
 import com.locusideas.locusideas.auth.SignInActivity;
+import com.locusideas.locusideas.auth.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     public void openSignInActivity(View view) {
         Intent signInIntent = new Intent(this, SignInActivity.class);
         startActivity(signInIntent);
+    }
+
+    public void openSignUpActivity(View view) {
+        Intent signUpIntent = new Intent(this, SignUpActivity.class);
+        startActivity(signUpIntent);
     }
 
     @Override
