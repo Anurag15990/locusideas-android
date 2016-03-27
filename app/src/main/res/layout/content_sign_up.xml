@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/signUpNameText"
             android:layout_marginTop="10dp"
             android:hint="Name" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/editText4"
+            android:id="@+id/signUpEmailText"
             android:layout_marginTop="10dp"
             android:hint="Email" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText5"
+            android:id="@+id/signUpPasswordText"
             android:layout_marginTop="10dp"
             android:hint="Password" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText6"
+            android:id="@+id/signUpConfirmText"
             android:hint="Confirm"
             android:layout_marginTop="10dp" />
 
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SIGN UP"
-            android:id="@+id/button"
+            android:id="@+id/signUpActivityButton"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:background="#049e8f"
@@ -95,7 +95,7 @@
                 android:text="or sign up with"
                 android:layout_weight="0.5"
                 android:textAlignment="center"
-                android:id="@+id/textView2" />
+                android:id="@+id/orSignUpWithText" />
 
             <View
                 android:layout_marginLeft="0dp"
@@ -120,10 +120,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Facebook"
-                android:id="@+id/button2"
+                android:id="@+id/signUpFacebookButton"
                 android:layout_weight="0.33"
                 android:layout_marginTop="10dp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#9f9d9d" />
 
             <Space
                 android:layout_width="0dp"
@@ -134,10 +135,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Twitter"
-                android:id="@+id/button3"
+                android:id="@+id/signUpTwitterButton"
                 android:layout_weight="0.33"
                 android:layout_marginTop="10dp"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:textColor="#9f9d9d" />
 
         </LinearLayout>
     </LinearLayout>
