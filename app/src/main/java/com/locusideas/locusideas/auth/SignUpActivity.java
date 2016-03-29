@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.login.LoginManager;
+import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -21,10 +26,15 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.FacebookException;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TwitterLoginButton loginButton;
+    private TwitterLoginButton twitterLoginButton;
+    private LoginButton facebookLoginButton;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         setTypeFaceForActivity();
         handleTwitterLoginForSignIn();
+        handleFacebookLogin();
     }
 
     public void setTypeFaceForActivity() {
@@ -58,11 +69,31 @@ public class SignUpActivity extends AppCompatActivity {
         TextView orSignInWith = (TextView)findViewById(R.id.orSignUpWithText);
         orSignInWith.setTypeface(montserratLight);
 
-        Typeface montserratBold = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-Bold.otf");
+    }
 
-        Button facebookButton = (Button) findViewById(R.id.signUpFacebookButton);
-        facebookButton.setTypeface(montserratBold);
+    public void handleFacebookLogin() {
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
 
+        facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button_signup);
+        facebookLoginButton.setReadPermissions("user_friends");
+
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
     @Override
@@ -70,12 +101,13 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // Make sure that the loginButton hears the result from any
         // Activity that it triggered.
-        loginButton.onActivityResult(requestCode, resultCode, data);
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public void handleTwitterLoginForSignIn() {
-        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button_for_signup);
-        loginButton.setCallback(new Callback<TwitterSession>() {
+        twitterLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button_for_signup);
+        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
                 // The TwitterSession is also available through:

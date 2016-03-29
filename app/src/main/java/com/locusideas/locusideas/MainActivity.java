@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import com.facebook.FacebookSdk;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.locusideas.locusideas.adapter.CustomPagerAdapter;
 import com.locusideas.locusideas.auth.SignInActivity;
 import com.locusideas.locusideas.auth.SignUpActivity;
@@ -90,5 +92,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(this);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(this);
+
     }
 }

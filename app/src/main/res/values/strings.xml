@@ -4,4 +4,5 @@
     <string name="title_activity_welcome_screen">WelcomeScreenActivity</string>
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="facebook_app_id">475311422661624</string>
 </resources>
