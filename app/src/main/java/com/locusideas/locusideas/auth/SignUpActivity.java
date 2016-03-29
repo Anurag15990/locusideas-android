@@ -1,5 +1,6 @@
 package com.locusideas.locusideas.auth;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -63,6 +65,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Make sure that the loginButton hears the result from any
+        // Activity that it triggered.
+        loginButton.onActivityResult(requestCode, resultCode, data);
+    }
+
     public void handleTwitterLoginForSignIn() {
         loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button_for_signup);
         loginButton.setCallback(new Callback<TwitterSession>() {
@@ -72,6 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
+                requestTwitterEmailId(session);
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -84,5 +95,20 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    public void requestTwitterEmailId(TwitterSession session) {
+        TwitterAuthClient authClient = new TwitterAuthClient();
+        authClient.requestEmail(session, new Callback<String>() {
+            @Override
+            public void success(Result<String> result) {
+                System.out.println(result.data);
+                // Do something with the result, which provides the email address
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
+    }
 
 }

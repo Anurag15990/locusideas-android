@@ -74,6 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
+                requestTwitterEmailId(session);
                 // with your app's user model
                 String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -85,5 +86,20 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
-    //TODO: Change Facebook & Twitter Buttons
+
+    public void requestTwitterEmailId(TwitterSession session) {
+        TwitterAuthClient authClient = new TwitterAuthClient();
+        authClient.requestEmail(session, new Callback<String>() {
+            @Override
+            public void success(Result<String> result) {
+                // Do something with the result, which provides the email address
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+            }
+        });
+    }
+
 }
