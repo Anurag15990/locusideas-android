@@ -14,6 +14,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
@@ -27,16 +28,17 @@ public interface UserService {
     @GET("/users")
     Call<List<User>> getUsers();
 
-    @POST("/users/auth")
+    @Headers({"Content-Type: application/json"})
+    @POST("/api/users/auth")
     Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
 
-    @POST("/users/auth")
+    @POST("/api/users/auth")
     Call<TokenResponse> twitterAuth(@Body TwitterAuthRequest twitterAuthRequest);
 
     @POST("/users")
     Call<User> updateUser(@Body User user);
 
-    @POST("/users/follow")
+    @POST("/api/users/follow")
     Call followUser(@Body FollowRequest followRequest);
 
     @POST("/users/unfollow")

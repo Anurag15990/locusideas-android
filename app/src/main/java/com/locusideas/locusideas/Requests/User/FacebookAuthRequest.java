@@ -1,5 +1,7 @@
 package com.locusideas.locusideas.Requests.User;
 
+import com.facebook.AccessToken;
+
 /**
  * Created by anurag on 4/29/16.
  */
@@ -9,8 +11,8 @@ public class FacebookAuthRequest {
     private String accessToken;
     private String id;
 
-    public FacebookAuthRequest(String accessToken, String id) {
-        this.accessToken = accessToken;
+    public FacebookAuthRequest(AccessToken accessToken, String id) {
+        this.accessToken = accessToken.getToken();
         this.id = id;
     }
 }
