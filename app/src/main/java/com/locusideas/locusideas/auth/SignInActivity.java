@@ -19,6 +19,10 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.locusideas.locusideas.Requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
+import com.locusideas.locusideas.Responses.TokenResponse;
+import com.locusideas.locusideas.services.BaseRouterService;
 import com.twitter.sdk.android.core.identity.*;
 import com.twitter.sdk.android.core.*;
 import com.facebook.GraphRequest;
@@ -26,6 +30,9 @@ import com.facebook.GraphResponse;
 import org.json.JSONObject;
 
 import com.locusideas.locusideas.R;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -87,6 +94,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                makeFbGraphRequest(loginResult.getAccessToken());
             }
 
             @Override
@@ -101,6 +109,37 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
+    void makeFbGraphRequest(final AccessToken accessToken) {
+        GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                String id = object.optString("id");
+                FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, id);
+                Call<TokenResponse> facebookAuthCall = BaseRouterService.baseRouterService.createUser().facebookAuth(facebookAuthRequest);
+                facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
+                    @Override
+                    public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                        System.out.println("Reached Success Callback Function");
+                        TokenResponse tokenResponse = response.body();
+                        System.out.println(tokenResponse.getToken());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<TokenResponse> call, Throwable t) {
+                        System.out.println("Reached Error Callback Function");
+                        System.out.println(t.getStackTrace());
+                    }
+                });
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
+    }
+
     public void handleTwitterLoginForSignIn() {
         twitterLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         twitterLoginButton.setCallback(new Callback<TwitterSession>() {
@@ -110,10 +149,23 @@ public class SignInActivity extends AppCompatActivity {
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
                 // TODO: Remove toast and use the TwitterSession's userID
+                TwitterAuthRequest authRequest = new TwitterAuthRequest(session.getAuthToken().token, session.getAuthToken().secret);
+                Call<TokenResponse> twitterAuthCall = BaseRouterService.baseRouterService.createUser().twitterAuth(authRequest);
+                twitterAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
+                    @Override
+                    public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                        System.out.println("Entered Success block");
+                        TokenResponse tokenResponse = response.body();
+                        System.out.println(tokenResponse.getToken());
+                    }
+
+                    @Override
+                    public void onFailure(Call<TokenResponse> call, Throwable t) {
+                        System.out.println("Entered Error block");
+                        System.out.println(t.getLocalizedMessage());
+                    }
+                });
                 requestTwitterEmailId(session);
-                // with your app's user model
-                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }
 
             @Override
