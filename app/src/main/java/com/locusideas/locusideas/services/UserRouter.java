@@ -20,7 +20,7 @@ import retrofit2.http.POST;
 /**
  * Created by anurag on 4/26/16.
  */
-public interface UserService {
+public interface UserRouter {
 
     @GET("/users/me")
     Call<User> getMe();
@@ -32,6 +32,7 @@ public interface UserService {
     @POST("/api/users/auth")
     Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
 
+    @Headers({"Content-Type: application/json"})
     @POST("/api/users/auth")
     Call<TokenResponse> twitterAuth(@Body TwitterAuthRequest twitterAuthRequest);
 
@@ -47,6 +48,7 @@ public interface UserService {
     @POST("/users/register")
     Call<TokenResponse> register(@Body RegisterRequest registerRequest);
 
-    @POST("/users/login")
+    @Headers({"Content-Type: application/json"})
+    @POST("/api/users/login")
     Call<TokenResponse> login(@Body LoginRequest loginRequest);
 }

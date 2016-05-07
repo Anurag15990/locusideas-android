@@ -1,7 +1,5 @@
 package com.locusideas.locusideas.services;
 
-import com.locusideas.locusideas.models.UserModels.Designer;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -10,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BaseRouterService {
 
-    private String baseUrl = "http://192.168.0.148:3002";
+    private String baseUrl = "http://api-staging-c3po.locusideas.com";
     private Retrofit retrofit;
     public static BaseRouterService baseRouterService = new BaseRouterService();
 
@@ -18,11 +16,11 @@ public class BaseRouterService {
         retrofit = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
     }
 
-    public DesignerService createDesignerService() {
-        return retrofit.create(DesignerService.class);
+    public DesignerRouter createDesignerService() {
+        return retrofit.create(DesignerRouter.class);
     }
 
-    public UserService createUser() {
-        return retrofit.create(UserService.class);
+    public UserRouter createUser() {
+        return retrofit.create(UserRouter.class);
     }
 }

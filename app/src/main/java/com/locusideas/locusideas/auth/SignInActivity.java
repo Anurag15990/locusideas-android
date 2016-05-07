@@ -3,6 +3,7 @@ package com.locusideas.locusideas.auth;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,9 +21,11 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.Requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.Requests.User.LoginRequest;
 import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.Responses.TokenResponse;
 import com.locusideas.locusideas.services.BaseRouterService;
+import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.identity.*;
 import com.twitter.sdk.android.core.*;
 import com.facebook.GraphRequest;
@@ -31,8 +34,7 @@ import org.json.JSONObject;
 
 import com.locusideas.locusideas.R;
 
-import retrofit2.Call;
-import retrofit2.Response;
+import retrofit2.*;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -148,7 +150,6 @@ public class SignInActivity extends AppCompatActivity {
                 // The TwitterSession is also available through:
                 // Twitter.getInstance().core.getSessionManager().getActiveSession()
                 TwitterSession session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
                 TwitterAuthRequest authRequest = new TwitterAuthRequest(session.getAuthToken().token, session.getAuthToken().secret);
                 Call<TokenResponse> twitterAuthCall = BaseRouterService.baseRouterService.createUser().twitterAuth(authRequest);
                 twitterAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
@@ -186,6 +187,32 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void failure(TwitterException exception) {
                 // Do something on failure
+            }
+        });
+    }
+
+    public void signInViaEmail(View view) {
+        EditText emailText = (EditText) findViewById(R.id.signinEmailText);
+        EditText passwordText = (EditText) findViewById(R.id.signInPasswordText);
+
+        loginWithEmail(emailText.getText().toString(), passwordText.getText().toString());
+    }
+
+    public void loginWithEmail(String emailId, String password) {
+        LoginRequest loginRequest = new LoginRequest(emailId, password);
+        Call<TokenResponse> loginAuthCall = BaseRouterService.baseRouterService.createUser().login(loginRequest);
+        loginAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                System.out.println("Entered Success Callback");
+                TokenResponse tokenResponse = response.body();
+                System.out.println(tokenResponse.getToken());
+            }
+
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+                System.out.println("Entered Error Callback");
+                System.out.println(t.getLocalizedMessage());
             }
         });
     }
