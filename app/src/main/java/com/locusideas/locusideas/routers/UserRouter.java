@@ -1,11 +1,11 @@
-package com.locusideas.locusideas.services;
+package com.locusideas.locusideas.routers;
 
-import com.locusideas.locusideas.Requests.User.FacebookAuthRequest;
-import com.locusideas.locusideas.Requests.User.FollowRequest;
-import com.locusideas.locusideas.Requests.User.LoginRequest;
-import com.locusideas.locusideas.Requests.User.RegisterRequest;
-import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
-import com.locusideas.locusideas.Requests.User.UnFollowRequest;
+import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.requests.User.FollowRequest;
+import com.locusideas.locusideas.requests.User.LoginRequest;
+import com.locusideas.locusideas.requests.User.RegisterRequest;
+import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
+import com.locusideas.locusideas.requests.User.UnFollowRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.models.UserModels.User;
 

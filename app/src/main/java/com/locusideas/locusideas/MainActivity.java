@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.facebook.FacebookSdk;
 
 import com.facebook.appevents.AppEventsLogger;
-import com.locusideas.locusideas.adapter.CustomPagerAdapter;
+import com.locusideas.locusideas.Adapter.CustomPagerAdapter;
 import com.locusideas.locusideas.auth.SignInActivity;
 import com.locusideas.locusideas.auth.SignUpActivity;
 import com.twitter.sdk.android.Twitter;
@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "NHvVcFgKeWsCiev1YeCQHLQsd";
     private static final String TWITTER_SECRET = "RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C";
-
-    SharedPreferences sharedPreferences = getSharedPreferences()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

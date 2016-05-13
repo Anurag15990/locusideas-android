@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.services;
+package com.locusideas.locusideas.routers;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
