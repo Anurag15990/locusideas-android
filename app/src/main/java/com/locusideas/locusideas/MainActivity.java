@@ -1,6 +1,7 @@
 package com.locusideas.locusideas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TWITTER_KEY = "NHvVcFgKeWsCiev1YeCQHLQsd";
     private static final String TWITTER_SECRET = "RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C";
 
+    SharedPreferences sharedPreferences = getSharedPreferences()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

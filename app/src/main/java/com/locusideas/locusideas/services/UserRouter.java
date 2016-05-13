@@ -6,7 +6,7 @@ import com.locusideas.locusideas.Requests.User.LoginRequest;
 import com.locusideas.locusideas.Requests.User.RegisterRequest;
 import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.Requests.User.UnFollowRequest;
-import com.locusideas.locusideas.Responses.TokenResponse;
+import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.models.UserModels.User;
 
 import java.util.List;
