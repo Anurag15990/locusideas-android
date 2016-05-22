@@ -4,7 +4,6 @@ import com.locusideas.locusideas.requests.user.FacebookAuthRequest;
 import com.locusideas.locusideas.requests.user.FollowRequest;
 import com.locusideas.locusideas.requests.user.LoginRequest;
 import com.locusideas.locusideas.requests.user.RegisterRequest;
-import com.locusideas.locusideas.requests.user.TwitterAuthRequest;
 import com.locusideas.locusideas.requests.user.UnFollowRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.models.UserModels.User;
