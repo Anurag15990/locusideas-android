@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.util.Log;
 import android.content.Intent;
 
 import com.facebook.AccessToken;
@@ -29,8 +28,6 @@ import com.facebook.GraphResponse;
 import org.json.JSONObject;
 
 import com.locusideas.locusideas.R;
-
-import retrofit2.*;
 
 public class SignInActivity extends AppCompatActivity {
 
