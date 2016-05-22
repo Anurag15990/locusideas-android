@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.services;
+package com.locusideas.locusideas.routers;
 
 import com.locusideas.locusideas.models.UserModels.Designer;
 
@@ -13,7 +13,7 @@ import retrofit2.http.Path;
  * Created by anurag on 4/25/16.
  */
 
-public interface DesignerService {
+public interface DesignerRouter {
 
     @POST("/designers")
     Call<Designer> createDesigner(@Body Designer designer);

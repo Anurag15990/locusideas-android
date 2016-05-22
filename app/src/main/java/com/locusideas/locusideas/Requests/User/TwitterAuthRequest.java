@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.Requests.User;
+package com.locusideas.locusideas.requests.User;
 
 /**
  * Created by anurag on 4/29/16.

@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.Responses;
+package com.locusideas.locusideas.responses;
 
 /**
  * Created by anurag on 4/29/16.

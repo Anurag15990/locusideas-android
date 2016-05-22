@@ -1,4 +1,4 @@
-package com.locusideas.locusideas.Requests.User;
+package com.locusideas.locusideas.requests.User;
 
 import com.facebook.AccessToken;
 

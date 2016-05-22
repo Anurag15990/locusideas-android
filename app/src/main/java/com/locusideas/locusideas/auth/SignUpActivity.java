@@ -3,17 +3,13 @@ package com.locusideas.locusideas.auth;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -23,10 +19,13 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
-import com.locusideas.locusideas.Requests.User.FacebookAuthRequest;
-import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
-import com.locusideas.locusideas.Responses.TokenResponse;
-import com.locusideas.locusideas.services.BaseRouterService;
+import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
+import com.locusideas.locusideas.responses.TokenResponse;
+import com.locusideas.locusideas.routers.BaseRouterService;
+import com.locusideas.locusideas.services.UserService;
+import com.locusideas.locusideas.services.UserServiceCallback;
+import com.locusideas.locusideas.utilites.SharedPreferencesManager;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -44,7 +43,6 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private TwitterLoginButton twitterLoginButton;
     private LoginButton facebookLoginButton;
     private CallbackManager callbackManager;
 
@@ -54,7 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         setTypeFaceForActivity();
-        handleTwitterLoginForSignIn();
         handleFacebookLogin();
     }
 
@@ -83,6 +80,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Initializes Facebook Login
+     */
     public void handleFacebookLogin() {
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
@@ -109,28 +110,16 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Making FB Graph Request to get FB User ID.
+     * @param accessToken
+     */
     void makeFbGraphRequest(final AccessToken accessToken) {
         GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 String id = object.optString("id");
-                FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, id);
-                Call<TokenResponse> facebookAuthCall = BaseRouterService.baseRouterService.createUser().facebookAuth(facebookAuthRequest);
-                facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
-                    @Override
-                    public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
-                        System.out.println("Reached Success Callback Function");
-                        TokenResponse tokenResponse = response.body();
-                        System.out.println(tokenResponse.getToken());
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<TokenResponse> call, Throwable t) {
-                        System.out.println("Reached Error Callback Function");
-                        System.out.println(t.getStackTrace());
-                    }
-                });
+                signInViaFacebook(accessToken, id);
             }
         });
 
@@ -145,62 +134,34 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // Make sure that the loginButton hears the result from any
         // Activity that it triggered.
-        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void handleTwitterLoginForSignIn() {
-        twitterLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button_for_signup);
-        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+    /**
+     * Makes an auth Call to login Via Facebook.
+     * @param accessToken
+     * @param id
+     */
+    private void signInViaFacebook(AccessToken accessToken, String id) {
+        UserService.sharedInstance.loginWithFacebook(accessToken, id, new UserServiceCallback<TokenResponse>() {
             @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
-                TwitterSession session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                TwitterAuthRequest authRequest = new TwitterAuthRequest(session.getAuthToken().token, session.getAuthToken().secret);
-                Call<TokenResponse> twitterAuthCall = BaseRouterService.baseRouterService.createUser().twitterAuth(authRequest);
-                twitterAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
-                    @Override
-                    public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
-                        System.out.println("Entered Success block");
-                        TokenResponse tokenResponse = response.body();
-                        System.out.println(tokenResponse.getToken());
-                    }
-
-                    @Override
-                    public void onFailure(Call<TokenResponse> call, Throwable t) {
-                        System.out.println("Entered Error block");
-                        System.out.println(t.getLocalizedMessage());
-                    }
-                });
-                requestTwitterEmailId(session);
-                // with your app's user model
+            public void onSuccess(@NonNull TokenResponse response) {
+                setUserAuthToken(response.getToken());
             }
 
             @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
+            public void onFailure(@NonNull String errorMessage) {
+                System.out.println(errorMessage);
             }
         });
     }
 
-    public void requestTwitterEmailId(final TwitterSession session) {
-        TwitterAuthClient authClient = new TwitterAuthClient();
-        authClient.requestEmail(session, new Callback<String>() {
-            @Override
-            public void success(Result<String> result) {
-                System.out.println(result.data);
-                // Do something with the result, which provides the email address
-
-            }
-
-            @Override
-            public void failure(TwitterException exception) {
-                // Do something on failure
-                System.out.println(exception.getLocalizedMessage());
-            }
-        });
+    /**
+     * Sets User Auth Token
+     * @param token - Token String
+     */
+    private void setUserAuthToken(String token) {
+        SharedPreferencesManager manager = new SharedPreferencesManager(PreferenceManager.getDefaultSharedPreferences(getApplication()));
+        manager.setUserAuthToken(token);
     }
-
 }

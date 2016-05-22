@@ -1,52 +1,76 @@
 package com.locusideas.locusideas.services;
 
-import com.locusideas.locusideas.Requests.User.FacebookAuthRequest;
-import com.locusideas.locusideas.Requests.User.FollowRequest;
-import com.locusideas.locusideas.Requests.User.LoginRequest;
-import com.locusideas.locusideas.Requests.User.RegisterRequest;
-import com.locusideas.locusideas.Requests.User.TwitterAuthRequest;
-import com.locusideas.locusideas.Requests.User.UnFollowRequest;
-import com.locusideas.locusideas.Responses.TokenResponse;
-import com.locusideas.locusideas.models.UserModels.User;
-
-import java.util.List;
+import com.facebook.AccessToken;
+import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.responses.TokenResponse;
+import com.locusideas.locusideas.routers.BaseRouterService;
+import com.locusideas.locusideas.requests.User.LoginRequest;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
+import retrofit2.Response;
+import retrofit2.Callback;
+
 
 /**
- * Created by anurag on 4/26/16.
+ * Class for Handling all User Related activity.
  */
-public interface UserService {
+public class UserService {
 
-    @GET("/users/me")
-    Call<User> getMe();
+    /**
+     * Singleton Instance for User Service Class.
+     */
+    public static UserService sharedInstance = new UserService();
 
-    @GET("/users")
-    Call<List<User>> getUsers();
+    /**
+     * User Service Constructor
+     */
+    public UserService() {}
 
-    @Headers({"Content-Type: application/json"})
-    @POST("/api/users/auth")
-    Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
+    /**
+     * Method that makes request to Login via EmailId & Password
+     * @param emailId - Email ID of the user
+     * @param password - Password of the user
+     * @param callback - Returns tokenResponse on success else return error Message
+     */
+    public void loginWithEmail(String emailId, String password, final UserServiceCallback<TokenResponse> callback) {
+        LoginRequest loginRequest = new LoginRequest(emailId, password);
+        Call<TokenResponse> loginAuthCall = BaseRouterService.baseRouterService.createUser().login(loginRequest);
+        loginAuthCall.enqueue(new Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                TokenResponse tokenResponse = response.body();
+                callback.onSuccess(tokenResponse);
+            }
 
-    @POST("/api/users/auth")
-    Call<TokenResponse> twitterAuth(@Body TwitterAuthRequest twitterAuthRequest);
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+                System.out.println(t.getLocalizedMessage());
+                callback.onFailure(t.getLocalizedMessage());
+            }
+        });
+    }
 
-    @POST("/users")
-    Call<User> updateUser(@Body User user);
+    /**
+     * Method that makes request to login via Facebook
+     * @param accessToken - Facebook Auth Token
+     * @param id - Facebook ID
+     * @param callback - Returns tokenResponse on success else returns errorMessage
+     */
+    public void loginWithFacebook(AccessToken accessToken, String id, final UserServiceCallback<TokenResponse> callback) {
+        FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, id);
+        Call<TokenResponse> facebookAuthCall = BaseRouterService.baseRouterService.createUser().facebookAuth(facebookAuthRequest);
+        facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                TokenResponse tokenResponse = response.body();
+                callback.onSuccess(tokenResponse);
+            }
 
-    @POST("/api/users/follow")
-    Call followUser(@Body FollowRequest followRequest);
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+                callback.onFailure(t.getLocalizedMessage());
+            }
+        });
+    }
 
-    @POST("/users/unfollow")
-    Call unFollowUser(@Body UnFollowRequest unFollowRequest);
-
-    @POST("/users/register")
-    Call<TokenResponse> register(@Body RegisterRequest registerRequest);
-
-    @POST("/users/login")
-    Call<TokenResponse> login(@Body LoginRequest loginRequest);
 }
