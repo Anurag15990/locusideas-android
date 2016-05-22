@@ -1,10 +1,10 @@
 package com.locusideas.locusideas.services;
 
 import com.facebook.AccessToken;
-import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
+import com.locusideas.locusideas.requests.user.FacebookAuthRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.routers.BaseRouterService;
-import com.locusideas.locusideas.requests.User.LoginRequest;
+import com.locusideas.locusideas.requests.user.LoginRequest;
 
 import retrofit2.Call;
 import retrofit2.Response;
