@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.view.Gravity;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -19,27 +21,15 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
-import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
-import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
-import com.locusideas.locusideas.routers.BaseRouterService;
 import com.locusideas.locusideas.services.UserService;
 import com.locusideas.locusideas.services.UserServiceCallback;
 import com.locusideas.locusideas.utilites.SharedPreferencesManager;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.FacebookException;
 
 import org.json.JSONObject;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -154,6 +144,50 @@ public class SignUpActivity extends AppCompatActivity {
                 System.out.println(errorMessage);
             }
         });
+    }
+
+    public void registerViaEmail(View view) {
+        // TODO: Check if Email ID is Valid.
+        EditText emailText = (EditText) findViewById(R.id.signUpEmailText);
+        EditText passwordText = (EditText) findViewById(R.id.signUpPasswordText);
+        EditText confirmText = (EditText) findViewById(R.id.signUpConfirmText);
+
+        if (this.comparePasswordText(passwordText.getText().toString(), confirmText.getText().toString())) {
+            UserService.sharedInstance.register(emailText.getText().toString(),
+                    passwordText.getText().toString(),
+                    new UserServiceCallback<TokenResponse>() {
+                        @Override
+                        public void onSuccess(@NonNull TokenResponse response) {
+                            setUserAuthToken(response.getToken());
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull String errorMessage) {
+                            System.out.println(errorMessage);
+                        }
+                    });
+        } else {
+            /**
+             * Showing Toast to inform user that password and confirm text does not match.
+             */
+            Toast toast = Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            toast.show();
+        }
+
+    }
+
+    /**
+     * Method to check if Confirmed Text Field Matches with Password Text Field.
+     * @param passwordText
+     * @param confirmText
+     * @return - True if both strings are equal else returns false.
+     */
+    private boolean comparePasswordText(String passwordText, String confirmText) {
+        if (passwordText.equals(confirmText)) {
+            return true;
+        }
+        return false;
     }
 
     /**

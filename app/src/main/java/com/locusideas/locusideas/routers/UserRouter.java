@@ -4,7 +4,6 @@ import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
 import com.locusideas.locusideas.requests.User.FollowRequest;
 import com.locusideas.locusideas.requests.User.LoginRequest;
 import com.locusideas.locusideas.requests.User.RegisterRequest;
-import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.requests.User.UnFollowRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.models.UserModels.User;
@@ -32,10 +31,6 @@ public interface UserRouter {
     @POST("/api/users/auth")
     Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
 
-    @Headers({"Content-Type: application/json"})
-    @POST("/api/users/auth")
-    Call<TokenResponse> twitterAuth(@Body TwitterAuthRequest twitterAuthRequest);
-
     @POST("/users")
     Call<User> updateUser(@Body User user);
 
@@ -45,7 +40,8 @@ public interface UserRouter {
     @POST("/users/unfollow")
     Call unFollowUser(@Body UnFollowRequest unFollowRequest);
 
-    @POST("/users/register")
+    @Headers({"Content-Type: application/json"})
+    @POST("/api/users/register")
     Call<TokenResponse> register(@Body RegisterRequest registerRequest);
 
     @Headers({"Content-Type: application/json"})

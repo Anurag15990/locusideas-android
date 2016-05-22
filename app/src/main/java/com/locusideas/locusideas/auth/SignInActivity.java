@@ -20,15 +20,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
-import com.locusideas.locusideas.routers.BaseRouterService;
 import com.locusideas.locusideas.services.UserService;
 import com.locusideas.locusideas.services.UserServiceCallback;
 import com.locusideas.locusideas.utilites.SharedPreferencesManager;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.identity.*;
-import com.twitter.sdk.android.core.*;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import org.json.JSONObject;
@@ -158,20 +153,23 @@ public class SignInActivity extends AppCompatActivity {
      * @param view
      */
     public void signInViaEmail(View view) {
+        // TODO: Check if Email ID is Valid.
         EditText emailText = (EditText) findViewById(R.id.signinEmailText);
         EditText passwordText = (EditText) findViewById(R.id.signInPasswordText);
 
-        UserService.sharedInstance.loginWithEmail(emailText.getText().toString(), passwordText.getText().toString(), new UserServiceCallback<TokenResponse>() {
-            @Override
-            public void onSuccess(@NonNull TokenResponse response) {
-                setUserAuthToken(response.getToken());
-            }
+        UserService.sharedInstance.loginWithEmail(emailText.getText().toString(),
+                passwordText.getText().toString(),
+                new UserServiceCallback<TokenResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull TokenResponse response) {
+                        setUserAuthToken(response.getToken());
+                    }
 
-            @Override
-            public void onFailure(@NonNull String errorMessage) {
-                System.out.println(errorMessage);
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull String errorMessage) {
+                        System.out.println(errorMessage);
+                    }
+                });
     }
 
     /**

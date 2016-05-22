@@ -71,6 +71,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             android:background="#049e8f"
+            android:onClick="registerViaEmail"
             android:textColor="#ffffff" />
 
         <LinearLayout
