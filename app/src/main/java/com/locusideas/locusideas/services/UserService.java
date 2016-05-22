@@ -1,6 +1,7 @@
 package com.locusideas.locusideas.services;
 
 import com.facebook.AccessToken;
+import com.locusideas.locusideas.requests.user.RegisterRequest;
 import com.locusideas.locusideas.requests.user.FacebookAuthRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
 import com.locusideas.locusideas.routers.BaseRouterService;
@@ -60,6 +61,29 @@ public class UserService {
         FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, id);
         Call<TokenResponse> facebookAuthCall = BaseRouterService.baseRouterService.createUser().facebookAuth(facebookAuthRequest);
         facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                TokenResponse tokenResponse = response.body();
+                callback.onSuccess(tokenResponse);
+            }
+
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+                callback.onFailure(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    /**
+     * Method to Register a User. Takes in User Email & Password to register the user.
+     * @param email - Email Id of the user.
+     * @param password - Password of the user.
+     * @param callback - Returns tokenResponse on success else return error Message
+     */
+    public void register(String email, String password, final UserServiceCallback<TokenResponse> callback) {
+        RegisterRequest registerRequest = new RegisterRequest(email, password);
+        Call<TokenResponse> registerCall = BaseRouterService.baseRouterService.createUser().register(registerRequest);
+        registerCall.enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
                 TokenResponse tokenResponse = response.body();

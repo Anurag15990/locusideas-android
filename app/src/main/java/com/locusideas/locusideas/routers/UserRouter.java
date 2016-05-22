@@ -32,10 +32,6 @@ public interface UserRouter {
     @POST("/api/users/auth")
     Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
 
-    @Headers({"Content-Type: application/json"})
-    @POST("/api/users/auth")
-    Call<TokenResponse> twitterAuth(@Body TwitterAuthRequest twitterAuthRequest);
-
     @POST("/users")
     Call<User> updateUser(@Body User user);
 
@@ -45,7 +41,8 @@ public interface UserRouter {
     @POST("/users/unfollow")
     Call unFollowUser(@Body UnFollowRequest unFollowRequest);
 
-    @POST("/users/register")
+    @Headers({"Content-Type: application/json"})
+    @POST("/api/users/register")
     Call<TokenResponse> register(@Body RegisterRequest registerRequest);
 
     @Headers({"Content-Type: application/json"})

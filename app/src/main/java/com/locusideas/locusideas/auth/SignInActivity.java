@@ -150,20 +150,23 @@ public class SignInActivity extends AppCompatActivity {
      * @param view
      */
     public void signInViaEmail(View view) {
+        // TODO: Check if Email ID is Valid.
         EditText emailText = (EditText) findViewById(R.id.signinEmailText);
         EditText passwordText = (EditText) findViewById(R.id.signInPasswordText);
 
-        UserService.sharedInstance.loginWithEmail(emailText.getText().toString(), passwordText.getText().toString(), new UserServiceCallback<TokenResponse>() {
-            @Override
-            public void onSuccess(@NonNull TokenResponse response) {
-                setUserAuthToken(response.getToken());
-            }
+        UserService.sharedInstance.loginWithEmail(emailText.getText().toString(),
+                passwordText.getText().toString(),
+                new UserServiceCallback<TokenResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull TokenResponse response) {
+                        setUserAuthToken(response.getToken());
+                    }
 
-            @Override
-            public void onFailure(@NonNull String errorMessage) {
-                System.out.println(errorMessage);
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull String errorMessage) {
+                        System.out.println(errorMessage);
+                    }
+                });
     }
 
     /**
