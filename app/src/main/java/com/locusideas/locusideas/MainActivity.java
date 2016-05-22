@@ -1,7 +1,6 @@
 package com.locusideas.locusideas;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -10,10 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import com.facebook.FacebookSdk;
 
 import com.facebook.appevents.AppEventsLogger;
-import com.locusideas.locusideas.Adapter.CustomPagerAdapter;
+import com.locusideas.locusideas.adapter.CustomPagerAdapter;
 import com.locusideas.locusideas.auth.SignInActivity;
 import com.locusideas.locusideas.auth.SignUpActivity;
 import com.twitter.sdk.android.Twitter;
