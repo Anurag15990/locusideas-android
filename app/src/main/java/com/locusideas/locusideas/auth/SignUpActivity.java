@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,27 +18,15 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
-import com.locusideas.locusideas.requests.User.FacebookAuthRequest;
-import com.locusideas.locusideas.requests.User.TwitterAuthRequest;
 import com.locusideas.locusideas.responses.TokenResponse;
-import com.locusideas.locusideas.routers.BaseRouterService;
 import com.locusideas.locusideas.services.UserService;
 import com.locusideas.locusideas.services.UserServiceCallback;
 import com.locusideas.locusideas.utilites.SharedPreferencesManager;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.FacebookException;
 
 import org.json.JSONObject;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
