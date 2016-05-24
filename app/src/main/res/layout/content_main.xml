@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.android.locusideas.MainActivity"
     tools:showIn="@layout/activity_main">
 
@@ -21,46 +16,34 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/login_bar_height"
         android:layout_alignBottom="@+id/pager"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@color/vulcan">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Sign In"
-            android:background="#049e8f"
-            android:backgroundTint="#000000"
-            android:backgroundTintMode="add"
+        <com.android.locusideas.core.ui.ButtonPlus
             android:id="@+id/signInButton"
-            android:layout_weight="1"
-            android:textStyle="normal"
-            android:textSize="14dp"
-            android:textColor="#ffffff"
-            android:onClick="openSignInActivity"
-            android:theme="@style/AppTheme.PopupOverlay" />
-
-        <View
-            android:layout_width="1dip"
-            android:layout_height="match_parent"
-            android:background="#99393b3e"
-            android:layout_centerHorizontal="true"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Sign Up"
-            android:background="#049e8f"
-            android:backgroundTint="#000000"
-            android:backgroundTintMode="add"
-            android:id="@+id/signUpButton"
+            android:text="@string/signin_text"
+            android:background="@color/authbutton_background"
             android:layout_weight="1"
-            android:textColor="#ffffff"
+            android:textSize="@dimen/auth_textsize"
+            android:textColor="@android:color/white"
+            android:onClick="openSignInActivity"
+            android:layout_marginRight="1dp"
+            app:customFont="@string/font_montserrat_extrabold"/>
+
+        <com.android.locusideas.core.ui.ButtonPlus
+            android:id="@+id/signUpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/signup_text"
+            android:background="@color/authbutton_background"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:onClick="openSignUpActivity"
-            android:textSize="14dp"
-            android:theme="@style/AppTheme.PopupOverlay" />
+            android:textSize="@dimen/auth_textsize"
+            app:customFont="@string/font_montserrat_extrabold"/>
 
     </LinearLayout>
 
