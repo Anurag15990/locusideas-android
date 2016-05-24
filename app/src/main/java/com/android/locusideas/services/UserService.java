@@ -1,16 +1,15 @@
 package com.android.locusideas.services;
 
-import com.facebook.AccessToken;
-import com.android.locusideas.requests.user.RegisterRequest;
 import com.android.locusideas.requests.user.FacebookAuthRequest;
-import com.android.locusideas.responses.TokenResponse;
-import com.android.locusideas.routers.BaseRouterService;
 import com.android.locusideas.requests.user.LoginRequest;
-
+import com.android.locusideas.requests.user.RegisterRequest;
+import com.android.locusideas.responses.TokenResponse;
+import com.android.locusideas.routers.ServiceGenerator;
+import com.android.locusideas.routers.UserRouter;
+import com.facebook.AccessToken;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Callback;
-
+import retrofit2.Response;
 
 /**
  * Class for Handling all User Related activity.
@@ -35,7 +34,10 @@ public class UserService {
      */
     public void loginWithEmail(String emailId, String password, final UserServiceCallback<TokenResponse> callback) {
         LoginRequest loginRequest = new LoginRequest(emailId, password);
-        Call<TokenResponse> loginAuthCall = BaseRouterService.baseRouterService.createUser().login(loginRequest);
+
+        Call<TokenResponse> loginAuthCall = ServiceGenerator.createService(UserRouter.class, ServiceGenerator.getRetrofitInstance())
+                .login(loginRequest);
+
         loginAuthCall.enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
@@ -59,7 +61,9 @@ public class UserService {
      */
     public void loginWithFacebook(AccessToken accessToken, String id, final UserServiceCallback<TokenResponse> callback) {
         FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, id);
-        Call<TokenResponse> facebookAuthCall = BaseRouterService.baseRouterService.createUser().facebookAuth(facebookAuthRequest);
+        Call<TokenResponse> facebookAuthCall = ServiceGenerator.createService(UserRouter.class, ServiceGenerator.getRetrofitInstance())
+                .facebookAuth(facebookAuthRequest);
+
         facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
@@ -82,7 +86,9 @@ public class UserService {
      */
     public void register(String email, String password, final UserServiceCallback<TokenResponse> callback) {
         RegisterRequest registerRequest = new RegisterRequest(email, password);
-        Call<TokenResponse> registerCall = BaseRouterService.baseRouterService.createUser().register(registerRequest);
+        Call<TokenResponse> registerCall = ServiceGenerator.createService(UserRouter.class, ServiceGenerator.getRetrofitInstance())
+                .register(registerRequest);
+
         registerCall.enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
