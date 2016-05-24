@@ -27,8 +27,14 @@ android {
         versionName "1.0"
     }
     buildTypes {
+
+        debug {
+            buildConfigField "String", "API_URL", "\" http://api-staging-c3po.locusideas.com\""
+        }
+
         release {
             minifyEnabled false
+            buildConfigField "String", "API_URL", "\" http://api-staging-c3po.locusideas.com\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
