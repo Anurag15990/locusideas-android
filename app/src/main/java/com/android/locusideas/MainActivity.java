@@ -1,21 +1,17 @@
 package com.android.locusideas;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-
-import com.facebook.appevents.AppEventsLogger;
-import com.locusideas.locusideas.R;
-
 import com.android.locusideas.adapter.CustomPagerAdapter;
 import com.android.locusideas.auth.SignInActivity;
 import com.android.locusideas.auth.SignUpActivity;
+import com.facebook.appevents.AppEventsLogger;
+import com.locusideas.locusideas.R;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
@@ -48,18 +44,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        setTypeFaceForActivity();
-    }
-
-
-    public void setTypeFaceForActivity() {
-        Typeface buttonFont = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-ExtraBold.otf");
-
-        Button signUpButton = (Button) findViewById(R.id.signUpButton);
-        signUpButton.setTypeface(buttonFont);
-
-        Button signInButton = (Button) findViewById(R.id.signInButton);
-        signInButton.setTypeface(buttonFont);
     }
 
     @Override
