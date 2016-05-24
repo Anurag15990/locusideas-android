@@ -1,5 +1,6 @@
 package com.android.locusideas.auth;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,25 +10,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.content.Intent;
-
+import com.android.locusideas.responses.TokenResponse;
+import com.android.locusideas.services.UserService;
+import com.android.locusideas.services.UserServiceCallback;
+import com.android.locusideas.utilites.SharedPreferencesManager;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.android.locusideas.responses.TokenResponse;
-import com.android.locusideas.services.UserService;
-import com.android.locusideas.services.UserServiceCallback;
-import com.android.locusideas.utilites.SharedPreferencesManager;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import org.json.JSONObject;
-
 import com.locusideas.locusideas.R;
+import org.json.JSONObject;
 
 public class SignInActivity extends AppCompatActivity {
 
