@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class TextViewPlus extends TextView {
 
     private static final String TAG = "TextViewPlus";
-    private static HashMap<String,Typeface> sCachedTypeface;
+    private static HashMap<String,Typeface> sCachedTypeface = new HashMap<>();
     public TextViewPlus(Context context) {
         super(context);
     }
@@ -42,22 +42,16 @@ public class TextViewPlus extends TextView {
     }
 
     public boolean setCustomFont(Context ctx, String font) {
-        Typeface tf = null;
+        Typeface tf = sCachedTypeface.get(font);
 
-        try {
-            if(sCachedTypeface == null) {
-                sCachedTypeface = new HashMap<>();
-                tf = Typeface.createFromAsset(ctx.getAssets(), font);
-                sCachedTypeface.put(font,tf);
-            } else if(sCachedTypeface.containsKey(font) && sCachedTypeface.get(font) != null) {
-                tf= sCachedTypeface.get(font);
-            } else {
+        if (tf == null){
+            try {
                 tf = Typeface.createFromAsset(ctx.getAssets(), font);
                 sCachedTypeface.put(font, tf);
+            } catch (Exception e) {
+                Log.e(TAG, "Could not get typeface: " + e.getMessage());
+                return false;
             }
-        } catch (Exception e) {
-            Log.e(TAG, "Could not get typeface: " + e.getMessage());
-            return false;
         }
 
         setTypeface(tf);
