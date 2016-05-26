@@ -1,32 +1,31 @@
-package com.android.locusideas.core.ui;
+package com.android.locusideas.core.ui.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.Button;
-
+import android.widget.TextView;
 import com.locusideas.locusideas.R;
-
 import java.util.HashMap;
 
 /**
  * Created on 24/05/16.
  */
-public class ButtonPlus extends Button{
-    private static final String TAG = "ButtonPlus";
+public class TextViewPlus extends TextView {
+
+    private static final String TAG = "TextViewPlus";
     private static HashMap<String,Typeface> sCachedTypeface = new HashMap<>();
-    public ButtonPlus(Context context) {
+    public TextViewPlus(Context context) {
         super(context);
     }
 
-    public ButtonPlus(Context context, AttributeSet attrs) {
+    public TextViewPlus(Context context, AttributeSet attrs) {
         super(context, attrs);
         setCustomFont(context, attrs);
     }
 
-    public ButtonPlus(Context context, AttributeSet attrs, int defStyle) {
+    public TextViewPlus(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setCustomFont(context, attrs);
     }
@@ -61,3 +60,4 @@ public class ButtonPlus extends Button{
     }
 
 }
+

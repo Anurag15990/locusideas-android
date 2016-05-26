@@ -20,7 +20,7 @@
         android:layout_alignBottom="@+id/pager"
         android:background="@color/vulcan">
 
-        <com.android.locusideas.core.ui.ButtonPlus
+        <com.android.locusideas.core.ui.widgets.ButtonPlus
             android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -33,7 +33,7 @@
             android:layout_marginRight="1dp"
             app:customFont="@string/font_montserrat_extrabold"/>
 
-        <com.android.locusideas.core.ui.ButtonPlus
+        <com.android.locusideas.core.ui.widgets.ButtonPlus
             android:id="@+id/signUpButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
