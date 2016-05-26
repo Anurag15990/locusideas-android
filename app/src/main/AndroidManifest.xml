@@ -3,6 +3,7 @@
     package="com.locusideas.locusideas">
 
     <application
+        android:name="com.android.locusideas.LocusApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"

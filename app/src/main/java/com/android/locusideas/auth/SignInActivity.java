@@ -3,17 +3,17 @@ package com.android.locusideas.auth;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.locusideas.LocusApplication;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.services.UserService;
 import com.android.locusideas.services.UserServiceCallback;
-import com.android.locusideas.utilites.SharedPreferencesManager;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -25,6 +25,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
+
 import org.json.JSONObject;
 
 public class SignInActivity extends AppCompatActivity {
@@ -172,7 +173,7 @@ public class SignInActivity extends AppCompatActivity {
      * @param token - Token String
      */
     private void setUserAuthToken(String token) {
-        SharedPreferencesManager manager = new SharedPreferencesManager(PreferenceManager.getDefaultSharedPreferences(getApplication()));
-        manager.setUserAuthToken(token);
+        ((LocusApplication)(getApplicationContext())).getSharedPreferencesManager()
+                .setUserAuthToken(token);
     }
 }

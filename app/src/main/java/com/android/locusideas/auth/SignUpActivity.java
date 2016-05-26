@@ -24,7 +24,7 @@ import com.locusideas.locusideas.R;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.services.UserService;
 import com.android.locusideas.services.UserServiceCallback;
-import com.android.locusideas.utilites.SharedPreferencesManager;
+import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.FacebookException;

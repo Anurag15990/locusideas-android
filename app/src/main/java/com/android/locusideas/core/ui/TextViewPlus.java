@@ -1,4 +1,4 @@
-package com.android.locusideas.core;
+package com.android.locusideas.core.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
