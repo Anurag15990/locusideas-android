@@ -63,18 +63,6 @@ public class SignInActivity extends AppCompatActivity {
         emailText.setTypeface(montserratLight);
         passwordText.setTypeface(montserratLight);
 
-        Typeface montserratExtraBold = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-ExtraBold.otf");
-
-        Button signInButton = (Button) findViewById(R.id.signInActivityButton);
-        signInButton.setTypeface(montserratExtraBold);
-
-        Typeface montserratSemiBold = Typeface.createFromAsset(getAssets(), "fonts/Montserrat-SemiBold.otf");
-
-        TextView forgotPassword = (TextView)findViewById(R.id.forgotPassword);
-        forgotPassword.setTypeface(montserratSemiBold);
-
-        TextView orSignInWith = (TextView)findViewById(R.id.orSignInWithText);
-        orSignInWith.setTypeface(montserratLight);
     }
 
     /**
