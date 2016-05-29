@@ -10,5 +10,8 @@ import dagger.Component;
 @Singleton
 @Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
+
+    LocusApplication locusApplication();
+
     void inject(LocusApplication la);
 }

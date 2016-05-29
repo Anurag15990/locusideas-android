@@ -1,9 +1,8 @@
 package com.android.locusideas;
 
 import android.app.Application;
-
+import android.content.Context;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
-
 import javax.inject.Inject;
 
 /**
@@ -21,10 +20,18 @@ public class LocusApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DaggerApplicationComponent.builder()
+        mApplicationComponent = DaggerApplicationComponent.builder()
                                 .applicationModule(new ApplicationModule(this))
-                                .build()
-                                .inject(this);
+                                .build();
+        mApplicationComponent.inject(this);
+    }
+
+    public ApplicationComponent getApplicationComponent(){
+        return mApplicationComponent;
+    }
+
+    public static LocusApplication get(Context context){
+        return (LocusApplication)context.getApplicationContext();
     }
 
     public SharedPreferencesManager getSharedPreferencesManager(){
