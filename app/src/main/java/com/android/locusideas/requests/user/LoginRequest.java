@@ -5,11 +5,11 @@ package com.android.locusideas.requests.user;
  */
 public class LoginRequest {
 
-    private String email;
+    private String emailAddress;
     private String password;
 
     public LoginRequest(String email, String password) {
-        this.email = email;
+        this.emailAddress = email;
         this.password = password;
     }
 }
