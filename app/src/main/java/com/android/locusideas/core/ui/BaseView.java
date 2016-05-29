@@ -16,8 +16,6 @@
 
 package com.android.locusideas.core.ui;
 
-public interface BaseView<T> {
-
-    void setPresenter(T presenter);
+public interface BaseView{
 
 }
