@@ -2,8 +2,6 @@ package com.android.locusideas.core.utils;
 
 import android.content.SharedPreferences;
 
-import javax.inject.Inject;
-
 /**
  * Created by anurag on 5/7/16.
  */
@@ -11,7 +9,6 @@ import javax.inject.Inject;
 /*
 * Shared Preferences Manager to store User Data.
 */
-
 public class SharedPreferencesManager {
 
     //TODO Anurag check
@@ -22,7 +19,6 @@ public class SharedPreferencesManager {
 
     private final SharedPreferences sharedPreferences;
 
-    @Inject
     public SharedPreferencesManager(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }
