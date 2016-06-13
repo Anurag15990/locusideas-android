@@ -1,12 +1,11 @@
 package com.android.locusideas.core.data.auth.remote;
 
-import com.android.locusideas.core.data.CoreServices.UserService;
+import com.android.locusideas.core.data.coreServices.UserService;
 import com.android.locusideas.core.data.auth.AuthDataContract;
 import com.android.locusideas.core.data.models.ApiError;
 import com.android.locusideas.requests.user.LoginRequest;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.routers.ServiceGenerator;
-import com.android.locusideas.routers.UserRouter;
 
 import retrofit2.Call;
 import retrofit2.Callback;

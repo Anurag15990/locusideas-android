@@ -1,4 +1,4 @@
-package com.android.locusideas.core.data.CoreServices;
+package com.android.locusideas.core.data.coreServices;
 
 import com.android.locusideas.requests.user.LoginRequest;
 import com.android.locusideas.responses.TokenResponse;
