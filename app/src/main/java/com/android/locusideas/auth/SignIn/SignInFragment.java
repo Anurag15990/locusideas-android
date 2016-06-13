@@ -1,15 +1,14 @@
 package com.android.locusideas.auth.SignIn;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.auth.SignIn.injection.DaggerSignInComponent;
 import com.android.locusideas.auth.SignIn.injection.SignInModule;
@@ -17,9 +16,6 @@ import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;
 import com.android.locusideas.core.ui.widgets.ButtonPlus;
-import com.android.locusideas.responses.TokenResponse;
-import com.android.locusideas.services.UserService;
-import com.android.locusideas.services.UserServiceCallback;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -31,9 +27,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.locusideas.locusideas.R;
-
 import org.json.JSONObject;
-
 import javax.inject.Inject;
 
 /**
@@ -79,6 +73,7 @@ public class SignInFragment extends Fragment implements SignInContract.View{
                 mPresenter.onSignIn(emailText.getText().toString(), passwordText.getText().toString());
             }
         });
+        handleFacebookLogin(getView());
     }
 
     @Override
@@ -138,6 +133,14 @@ public class SignInFragment extends Fragment implements SignInContract.View{
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Make sure that the loginButton hears the result from any
+        // Activity that it triggered.
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     /**
      * Making FB Graph Request to get FB User ID.
      * @param accessToken
@@ -163,26 +166,7 @@ public class SignInFragment extends Fragment implements SignInContract.View{
      * @param id
      */
     private void signInViaFacebook(AccessToken accessToken, String id) {
-        UserService.sharedInstance.loginWithFacebook(accessToken, id, new UserServiceCallback<TokenResponse>() {
-            @Override
-            public void onSuccess(@NonNull TokenResponse response) {
-                setUserAuthToken(response.getToken());
-            }
-
-            @Override
-            public void onFailure(@NonNull String errorMessage) {
-                System.out.println(errorMessage);
-            }
-        });
-    }
-
-    /**
-     * Sets User Auth Token
-     * @param token - Token String
-     */
-    private void setUserAuthToken(String token) {
-        ((LocusApplication)(getActivity().getApplicationContext())).getSharedPreferencesManager()
-                .setUserAuthToken(token);
+        mPresenter.onSignInViaFacebook(accessToken, id);
     }
 
     @Override

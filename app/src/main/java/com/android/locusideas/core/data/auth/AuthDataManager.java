@@ -1,12 +1,12 @@
 package com.android.locusideas.core.data.auth;
 
 import android.util.Log;
-
 import com.android.locusideas.auth.SignIn.SignInPresenter;
 import com.android.locusideas.auth.SignUpPresenter;
 import com.android.locusideas.core.data.auth.local.AuthLocalDataService;
 import com.android.locusideas.core.data.auth.remote.AuthRemoteDataService;
 import com.android.locusideas.core.data.models.ApiError;
+import com.facebook.AccessToken;
 
 /**
  * Created on 28/05/16.
@@ -34,6 +34,11 @@ public class AuthDataManager implements AuthDataContract.Services, AuthDataContr
     @Override
     public void setSignUpPresenter(SignUpPresenter signUpPresenter){
         mSignUpPresenter = signUpPresenter;
+    }
+
+    @Override
+    public void onSignInViaFacebook(AccessToken accessToken, String fbId) {
+        mAuthRemoteService.signInViaFacebook(accessToken, fbId);
     }
 
     @Override

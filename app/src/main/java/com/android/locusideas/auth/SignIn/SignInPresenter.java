@@ -1,8 +1,8 @@
 package com.android.locusideas.auth.SignIn;
 
 import android.util.Log;
-
 import com.android.locusideas.core.data.auth.AuthDataContract;
+import com.facebook.AccessToken;
 
 /**
  * Created on 26/05/16.
@@ -32,6 +32,11 @@ public class SignInPresenter implements SignInContract.Presenter{
     @Override
     public void onSignIn(String emailId, String password) {
         mAuthDataManager.onSignInWithEmailId(emailId, password);
+    }
+
+    @Override
+    public void onSignInViaFacebook(AccessToken accessToken, String fbId){
+        mAuthDataManager.onSignInViaFacebook(accessToken, fbId);
     }
 
     @Override

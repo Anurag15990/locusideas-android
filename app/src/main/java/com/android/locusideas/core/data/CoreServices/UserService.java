@@ -1,5 +1,6 @@
 package com.android.locusideas.core.data.coreServices;
 
+import com.android.locusideas.requests.user.FacebookAuthRequest;
 import com.android.locusideas.requests.user.LoginRequest;
 import com.android.locusideas.responses.TokenResponse;
 
@@ -16,4 +17,8 @@ public interface UserService {
     @Headers({"Content-Type: application/json"})
     @POST("/api/users/login")
     Call<TokenResponse> login(@Body LoginRequest loginRequest);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("/api/users/auth")
+    Call<TokenResponse> facebookAuth(@Body FacebookAuthRequest facebookAuthRequest);
 }
