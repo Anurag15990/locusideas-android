@@ -1,5 +1,6 @@
 package com.android.locusideas.core.data.auth.remote;
 
+import com.android.locusideas.core.data.CoreServices.UserService;
 import com.android.locusideas.core.data.auth.AuthDataContract;
 import com.android.locusideas.core.data.models.ApiError;
 import com.android.locusideas.requests.user.LoginRequest;
@@ -25,7 +26,7 @@ public class AuthRemoteDataService {
     public void signInWithEmailId(String emailId, String password){
         LoginRequest loginRequest = new LoginRequest(emailId, password);
 
-        Call<TokenResponse> loginAuthCall = ServiceGenerator.createService(UserRouter.class, ServiceGenerator.getRetrofitInstance())
+        Call<TokenResponse> loginAuthCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance())
                 .login(loginRequest);
 
         loginAuthCall.enqueue(new Callback<TokenResponse>() {
