@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.android.locusideas.ApplicationModule;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.auth.injection.DaggerSignInComponent;
 import com.android.locusideas.auth.injection.SignInModule;
+import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
+import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;
 import com.android.locusideas.core.ui.widgets.ButtonPlus;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.services.UserService;
@@ -46,16 +47,21 @@ public class SignInFragment extends Fragment implements SignInContract.View{
     EditText passwordText;
     ButtonPlus mSignInButton;
     private CallbackManager callbackManager;
+    private AuthComponent mAuthComponent;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_sign_in, container, false);
 
+        mAuthComponent = DaggerAuthComponent.builder()
+                .authModule(new AuthModule())
+                .applicationComponent(((LocusApplication) getActivity().getApplication()).getApplicationComponent())
+                .build();
+
         DaggerSignInComponent.builder()
                 .signInModule(new SignInModule(this))
-                .authModule(new AuthModule())
-                .applicationModule(new ApplicationModule(LocusApplication.get(getActivity())))
+                .authComponent(mAuthComponent)
                 .build()
                 .inject(this);
 
@@ -79,6 +85,13 @@ public class SignInFragment extends Fragment implements SignInContract.View{
     public void onResume() {
         super.onResume();
         mPresenter.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        //Set auth component to null to be gc
+        mAuthComponent = null;
+        super.onDestroy();
     }
 
     /**

@@ -5,6 +5,7 @@ import com.android.locusideas.auth.SignInPresenter;
 import com.android.locusideas.core.data.auth.AuthDataContract;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.utils.injection.PerActivity;
+import com.android.locusideas.core.utils.injection.PerComponent;
 
 import javax.inject.Singleton;
 
@@ -14,7 +15,7 @@ import dagger.Provides;
 /**
  * Created on 28/05/16.
  */
-@Module(includes = {AuthModule.class})
+@Module
 public class SignInModule {
 
     private SignInContract.View mView;
@@ -24,7 +25,7 @@ public class SignInModule {
     }
 
     @Provides
-    @Singleton
+    @PerActivity
     public SignInContract.Presenter getSignInPresenter(AuthDataContract.Services authServices){
         return new SignInPresenter(mView, authServices);
     }
