@@ -1,4 +1,4 @@
-package com.android.locusideas.auth;
+package com.android.locusideas.auth.SignIn;
 
 import android.util.Log;
 

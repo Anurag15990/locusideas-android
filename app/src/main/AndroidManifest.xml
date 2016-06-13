@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.locusideas.auth.SignInActivity"
+            android:name="com.android.locusideas.auth.SignIn.SignInActivity"
             android:label="@string/title_activity_sign_in"
             android:parentActivityName="com.android.locusideas.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

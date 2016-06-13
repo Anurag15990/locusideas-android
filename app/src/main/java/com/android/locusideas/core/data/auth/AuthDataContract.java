@@ -1,6 +1,6 @@
 package com.android.locusideas.core.data.auth;
 
-import com.android.locusideas.auth.SignInPresenter;
+import com.android.locusideas.auth.SignIn.SignInPresenter;
 import com.android.locusideas.auth.SignUpPresenter;
 import com.android.locusideas.core.data.models.ApiError;
 
