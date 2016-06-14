@@ -5,6 +5,7 @@ import com.android.locusideas.core.data.coreServices.UserService;
 import com.android.locusideas.core.data.models.ApiError;
 import com.android.locusideas.requests.user.FacebookAuthRequest;
 import com.android.locusideas.requests.user.LoginRequest;
+import com.android.locusideas.requests.user.RegisterRequest;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.routers.ServiceGenerator;
 import com.facebook.AccessToken;
@@ -67,6 +68,25 @@ public class AuthRemoteDataService {
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
                 mAuthDataCallbacks.onSignInFailure(new ApiError(t.getMessage()));
+            }
+        });
+    }
+
+    public void signUpWithEmailId(String emailId, String password) {
+        RegisterRequest registerRequest = new RegisterRequest(emailId, password);
+        Call<TokenResponse> registerCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance())
+                .register(registerRequest);
+
+        registerCall.enqueue(new Callback<TokenResponse>() {
+            @Override
+            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                TokenResponse tokenResponse = response.body();
+                mAuthDataCallbacks.onSignUpSuccess(tokenResponse.getToken());
+            }
+
+            @Override
+            public void onFailure(Call<TokenResponse> call, Throwable t) {
+                mAuthDataCallbacks.onSignUpFailure(new ApiError(t.getMessage()));
             }
         });
     }

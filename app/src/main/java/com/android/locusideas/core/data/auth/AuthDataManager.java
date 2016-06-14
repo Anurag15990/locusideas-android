@@ -1,6 +1,7 @@
 package com.android.locusideas.core.data.auth;
 
 import android.util.Log;
+
 import com.android.locusideas.auth.SignIn.SignInPresenter;
 import com.android.locusideas.auth.SignUp.SignUpPresenter;
 import com.android.locusideas.core.data.auth.local.AuthLocalDataService;
@@ -43,17 +44,19 @@ public class AuthDataManager implements AuthDataContract.Services, AuthDataContr
 
     @Override
     public void onSignUpWithEmailId(String emailId, String password) {
-
+        mAuthRemoteService.signUpWithEmailId(emailId, password);
     }
 
     @Override
     public void onSignUpSuccess(String token) {
-
+        Log.d("Presenter", "Authorization successful");
+        mAuthLocalService.saveUserToken(token);
+        mSignUpPresenter.onSignUpSuccess();
     }
 
     @Override
     public void onSignUpFailure(ApiError error) {
-
+        mSignUpPresenter.onSignUpFailure(error.getMessage());
     }
 
     @Override
