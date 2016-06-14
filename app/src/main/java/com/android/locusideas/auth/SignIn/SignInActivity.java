@@ -15,7 +15,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-         signInFragment = (SignInFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        signInFragment = (SignInFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
 
         if (signInFragment == null){
             signInFragment = new SignInFragment();
