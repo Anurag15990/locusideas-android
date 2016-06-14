@@ -30,12 +30,18 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField "String", "API_URL", "\" http://api-staging-c3po.locusideas.com\""
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", "\"http://api-staging-c3po.locusideas.com\""
+            buildConfigField "String", "TWITTER_KEY", "\"NHvVcFgKeWsCiev1YeCQHLQsd\""
+            buildConfigField "String", "TWITTER_SECRET", "\"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C\""
         }
 
         release {
-            minifyEnabled false
-            buildConfigField "String", "API_URL", "\" http://api-staging-c3po.locusideas.com\""
+            minifyEnabled true
+            buildConfigField "String", "API_URL", "\"http://api-staging-c3po.locusideas.com\""
+            buildConfigField "String", "TWITTER_KEY", "\"NHvVcFgKeWsCiev1YeCQHLQsd\""
+            buildConfigField "String", "TWITTER_SECRET", "\"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

@@ -15,12 +15,10 @@ import com.locusideas.locusideas.R;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import io.fabric.sdk.android.Fabric;
+import static com.locusideas.locusideas.BuildConfig.TWITTER_KEY;
+import static com.locusideas.locusideas.BuildConfig.TWITTER_SECRET;
 
 public class MainActivity extends AppCompatActivity {
-
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
-    private static final String TWITTER_KEY = "NHvVcFgKeWsCiev1YeCQHLQsd";
-    private static final String TWITTER_SECRET = "RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
