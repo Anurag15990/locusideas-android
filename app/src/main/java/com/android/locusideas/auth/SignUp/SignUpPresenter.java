@@ -1,4 +1,4 @@
-package com.android.locusideas.auth;
+package com.android.locusideas.auth.SignUp;
 
 /**
  * Created on 28/05/16.

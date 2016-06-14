@@ -1,4 +1,4 @@
-package com.android.locusideas.auth;
+package com.android.locusideas.auth.SignUp;
 
 import android.content.Intent;
 import android.graphics.Typeface;

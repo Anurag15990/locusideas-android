@@ -29,7 +29,7 @@
                 android:value="com.android.locusideas.auth.AuthActivity" />
         </activity>
         <activity
-            android:name="com.android.locusideas.auth.SignUpActivity"
+            android:name="com.android.locusideas.auth.SignUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName="com.android.locusideas.auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">

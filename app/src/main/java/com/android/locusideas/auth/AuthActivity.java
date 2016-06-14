@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import com.android.locusideas.adapter.CustomPagerAdapter;
 import com.android.locusideas.auth.SignIn.SignInActivity;
+import com.android.locusideas.auth.SignUp.SignUpActivity;
 import com.facebook.appevents.AppEventsLogger;
 import com.locusideas.locusideas.R;
 import com.twitter.sdk.android.Twitter;
