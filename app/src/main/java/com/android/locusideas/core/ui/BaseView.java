@@ -17,5 +17,5 @@
 package com.android.locusideas.core.ui;
 
 public interface BaseView{
-
+    boolean isActive();
 }
