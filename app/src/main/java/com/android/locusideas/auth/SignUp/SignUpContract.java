@@ -9,6 +9,7 @@ import com.android.locusideas.core.ui.BaseView;
 public interface SignUpContract {
 
     interface Presenter extends BasePresenter{
+        void onClickSignUp(String email, String password);
     }
 
     interface View extends BaseView{
