@@ -1,10 +1,8 @@
 package com.android.locusideas.auth.SignIn.injection;
 
 import com.android.locusideas.auth.SignIn.SignInFragment;
-import com.android.locusideas.auth.SignIn.SignInPresenter;
 import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.utils.injection.PerActivity;
-
 import dagger.Component;
 
 /**
@@ -14,5 +12,4 @@ import dagger.Component;
 @Component(dependencies = {AuthComponent.class} ,modules = {SignInModule.class})
 public interface SignInComponent {
     void inject(SignInFragment signInFragment);
-    void inject(SignInPresenter signInPresenter);
 }
