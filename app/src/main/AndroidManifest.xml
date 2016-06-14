@@ -22,7 +22,6 @@
         <activity
             android:name="com.android.locusideas.auth.SignIn.SignInActivity"
             android:label="@string/title_activity_sign_in"
-            android:parentActivityName="com.android.locusideas.auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -31,7 +30,6 @@
         <activity
             android:name="com.android.locusideas.auth.SignUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName="com.android.locusideas.auth.AuthActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
