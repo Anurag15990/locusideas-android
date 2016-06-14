@@ -3,6 +3,7 @@ package com.android.locusideas;
 import android.app.Application;
 import android.content.Context;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
+import com.facebook.FacebookSdk;
 import javax.inject.Inject;
 
 /**
@@ -24,6 +25,11 @@ public class LocusApplication extends Application {
                                 .applicationModule(new ApplicationModule(this))
                                 .build();
         mApplicationComponent.inject(this);
+        initializeFBSdk();
+    }
+
+    private void initializeFBSdk(){
+        FacebookSdk.sdkInitialize(this);
     }
 
     public ApplicationComponent getApplicationComponent(){
