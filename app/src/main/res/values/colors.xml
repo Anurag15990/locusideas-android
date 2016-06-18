@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorButtonNormal">#FF4081</color>
+
+    <color name="authbutton_background">#049e8f</color>
+    <color name="vulcan">#99393b3e</color>
+
+</resources>
