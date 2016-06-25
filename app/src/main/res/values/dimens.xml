@@ -6,4 +6,14 @@
 
     <dimen name="login_bar_height">50dp</dimen>
 
+    <fraction name="header_aspectRatio_16_by_9">178%</fraction>
+
+    <dimen name="spacing_8dp">8dp</dimen>
+    <dimen name="spacing_16dp">16dp</dimen>
+    <dimen name="spacing_24dp">24dp</dimen>
+
+    <item name="primary_opacity" format="float" type="dimen">0.87</item>
+    <item name="secondary_opacity" format="float" type="dimen">0.54</item>
+    <item name="tertiary_opacity" format="float" type="dimen">0.38</item>
+
 </resources>
