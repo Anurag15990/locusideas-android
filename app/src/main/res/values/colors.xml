@@ -9,4 +9,6 @@
     <color name="authbutton_background">#049e8f</color>
     <color name="vulcan">#99393b3e</color>
 
+    <color name="item_liked">#ffe81c4f</color>
+
 </resources>
