@@ -15,4 +15,9 @@
     <string name="signup_name_hint">Name</string>
     <string name="signup_password_hint">Password</string>
     <string name="signup_confirm_password_hint">Confirm</string>
+
+    <string name="designs_str">Designs</string>
+    <string name="designers_str">Designers</string>
+    <string name="requirements_str">wants</string>
+    <string name="settings_str">Settings</string>
 </resources>
