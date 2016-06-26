@@ -1,40 +1,28 @@
 package com.android.locusideas.home;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Created by satyaiyengar on 18/06/16.
+ * Created on 18/06/16.
  */
-
 public class MainShellViewPagerAdapter extends FragmentPagerAdapter {
 
-    List<Fragment> mainPages = new ArrayList<>();
+    private MainShellFragmentsProvider mainShellFragmentsProvider;
 
-    public MainShellViewPagerAdapter(FragmentManager fm) {
+    public MainShellViewPagerAdapter(FragmentManager fm, MainShellFragmentsProvider mainShellFragmentsProvider) {
         super(fm);
-    }
-
-    /**
-     * Adds fragments to list and calls notify adapter to update view
-     *
-     * @note - Call after setting adapter
-     */
-    public void init(){
+        this.mainShellFragmentsProvider = mainShellFragmentsProvider;
     }
 
     @Override
-    public Fragment getItem(int position) {
-        return mainPages.get(position);
+    public BaseHomeFragment getItem(int position) {
+        return mainShellFragmentsProvider.provideFragmentAtPosition(position);
     }
 
     @Override
     public int getCount() {
-        return mainPages.size();
+        return mainShellFragmentsProvider.getFragmentCount();
     }
 
 }
