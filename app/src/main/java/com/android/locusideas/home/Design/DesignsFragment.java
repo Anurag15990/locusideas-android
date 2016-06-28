@@ -1,4 +1,4 @@
-package com.android.locusideas.home.design;
+package com.android.locusideas.home.Design;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.locusideas.core.ui.TabIcon;
-import com.android.locusideas.core.ui.widgets.TextViewPlus;
 import com.android.locusideas.home.BaseHomeFragment;
 import com.locusideas.locusideas.R;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -17,10 +15,6 @@ import butterknife.ButterKnife;
  */
 
 public class DesignsFragment extends BaseHomeFragment{
-
-    //TODO added for testing remove
-    @BindView(R.id.fragment_name)
-    TextViewPlus fragmentName;
 
     public static DesignsFragment getInstance(){
         return new DesignsFragment();
@@ -41,12 +35,6 @@ public class DesignsFragment extends BaseHomeFragment{
     @Override
     public void onResume() {
         super.onResume();
-        updateFragmentName();
-    }
-
-    //TODO added for testing remove
-    private void updateFragmentName(){
-        fragmentName.setText(this.getClass().getSimpleName());
     }
 
 
