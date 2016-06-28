@@ -1,4 +1,4 @@
-package com.android.locusideas.home.Design;
+package com.android.locusideas.home.design;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
