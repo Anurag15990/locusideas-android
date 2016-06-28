@@ -2,12 +2,14 @@ package com.android.locusideas.home.design;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.locusideas.core.ui.TabIcon;
 import com.android.locusideas.home.BaseHomeFragment;
 import com.locusideas.locusideas.R;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -15,6 +17,9 @@ import butterknife.ButterKnife;
  */
 
 public class DesignsFragment extends BaseHomeFragment{
+
+    @BindView(R.id.designs_recycler_view)
+    RecyclerView designsRecyclerView;
 
     public static DesignsFragment getInstance(){
         return new DesignsFragment();
