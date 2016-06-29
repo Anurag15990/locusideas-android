@@ -1,7 +1,7 @@
 package com.android.locusideas.home;
 
 import com.android.locusideas.core.ui.TabIcon;
-import com.android.locusideas.home.design.DesignsFragment;
+import com.android.locusideas.home.projects.ProjectsFragment;
 import com.android.locusideas.home.designers.DesignersFragment;
 import com.android.locusideas.home.requirements.RequirementsFragment;
 import com.android.locusideas.home.settings.SettingsFragment;
@@ -31,8 +31,8 @@ public class MainShellFragmentsProvider {
         return item;
     }
 
-    private DesignsFragment provideDesignsFragment(){
-        return DesignsFragment.getInstance();
+    private ProjectsFragment provideDesignsFragment(){
+        return ProjectsFragment.getInstance();
     }
 
     private DesignersFragment provideDesignersFragment(){
@@ -55,7 +55,7 @@ public class MainShellFragmentsProvider {
             TabIcon icon = null;
 
             if (i == 0){
-                icon = DesignsFragment.getTabIcon();
+                icon = ProjectsFragment.getTabIcon();
             } else if (i == 1){
                 icon = DesignersFragment.getTabIcon();
             } else if (i == 2){
