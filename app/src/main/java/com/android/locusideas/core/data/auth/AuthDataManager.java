@@ -1,12 +1,12 @@
 package com.android.locusideas.core.data.auth;
 
 import android.util.Log;
-
 import com.android.locusideas.auth.SignIn.SignInPresenter;
 import com.android.locusideas.auth.SignUp.SignUpPresenter;
 import com.android.locusideas.core.data.auth.local.AuthLocalDataService;
 import com.android.locusideas.core.data.auth.remote.AuthRemoteDataService;
 import com.android.locusideas.core.data.models.ApiError;
+import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.facebook.AccessToken;
 
 /**
@@ -21,10 +21,10 @@ public class AuthDataManager implements AuthDataContract.Services, AuthDataContr
     SignInPresenter mSignInPresenter;
     SignUpPresenter mSignUpPresenter;
 
-    public AuthDataManager(AuthRemoteDataService authRemoteService, AuthLocalDataService authLocalDataService){
+    public AuthDataManager(AuthRemoteDataService authRemoteService, AuthLocalDataService authLocalDataService, SharedPreferencesManager sharedPreferencesManager){
         mAuthRemoteService = authRemoteService;
         mAuthLocalService = authLocalDataService;
-        mAuthRemoteService.setAuthDataCallbacks(this);
+        mAuthRemoteService.setAuthDataCallbacks(this, sharedPreferencesManager);
     }
 
     @Override
