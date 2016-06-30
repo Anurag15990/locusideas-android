@@ -1,7 +1,7 @@
 package com.android.locusideas.core.data.auth;
 
-import com.android.locusideas.auth.SignIn.SignInPresenter;
-import com.android.locusideas.auth.SignUp.SignUpPresenter;
+import com.android.locusideas.auth.signIn.SignInPresenter;
+import com.android.locusideas.auth.signUp.SignUpPresenter;
 import com.android.locusideas.core.data.models.ApiError;
 import com.facebook.AccessToken;
 

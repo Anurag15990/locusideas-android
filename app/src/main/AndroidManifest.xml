@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.locusideas.auth.SignIn.SignInActivity"
+            android:name="com.android.locusideas.auth.signIn.SignInActivity"
             android:label="@string/title_activity_sign_in"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -28,7 +28,7 @@
                 android:value="com.android.locusideas.auth.AuthActivity" />
         </activity>
         <activity
-            android:name="com.android.locusideas.auth.SignUp.SignUpActivity"
+            android:name="com.android.locusideas.auth.signUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

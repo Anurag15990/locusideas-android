@@ -2,8 +2,8 @@ package com.android.locusideas.core.data.auth;
 
 import android.util.Log;
 
-import com.android.locusideas.auth.SignIn.SignInPresenter;
-import com.android.locusideas.auth.SignUp.SignUpPresenter;
+import com.android.locusideas.auth.signIn.SignInPresenter;
+import com.android.locusideas.auth.signUp.SignUpPresenter;
 import com.android.locusideas.core.data.auth.local.AuthLocalDataService;
 import com.android.locusideas.core.data.auth.remote.AuthRemoteDataService;
 import com.android.locusideas.core.data.models.ApiError;

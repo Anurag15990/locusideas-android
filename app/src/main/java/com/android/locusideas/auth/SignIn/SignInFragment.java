@@ -1,4 +1,4 @@
-package com.android.locusideas.auth.SignIn;
+package com.android.locusideas.auth.signIn;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import com.android.locusideas.LocusApplication;
-import com.android.locusideas.auth.SignIn.injection.DaggerSignInComponent;
-import com.android.locusideas.auth.SignIn.injection.SignInModule;
+import com.android.locusideas.auth.signIn.injection.DaggerSignInComponent;
+import com.android.locusideas.auth.signIn.injection.SignInModule;
 import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;

@@ -1,4 +1,4 @@
-package com.android.locusideas.auth.SignIn;
+package com.android.locusideas.auth.signIn;
 
 import android.content.Intent;
 import android.os.Bundle;

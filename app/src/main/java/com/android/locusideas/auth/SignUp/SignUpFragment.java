@@ -1,4 +1,4 @@
-package com.android.locusideas.auth.SignUp;
+package com.android.locusideas.auth.signUp;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,16 +13,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.locusideas.LocusApplication;
-import com.android.locusideas.auth.SignUp.injection.DaggerSignUpComponent;
-import com.android.locusideas.auth.SignUp.injection.SignUpModule;
+import com.android.locusideas.auth.signUp.injection.DaggerSignUpComponent;
+import com.android.locusideas.auth.signUp.injection.SignUpModule;
 import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;
 import com.locusideas.locusideas.R;
 
 import javax.inject.Inject;
-
-import butterknife.OnClick;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
