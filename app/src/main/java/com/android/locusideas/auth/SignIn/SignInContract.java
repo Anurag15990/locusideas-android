@@ -19,5 +19,11 @@ public interface SignInContract {
 
     interface View extends BaseView{
         boolean isActive();
+
+        void showLoader();
+
+        void hideLoader();
+
+        void navigateToMainActivity();
     }
 }

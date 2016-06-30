@@ -31,6 +31,7 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void onSignIn(String emailId, String password) {
+        mSignInView.showLoader();
         mAuthDataManager.onSignInWithEmailId(emailId, password);
     }
 
@@ -41,11 +42,14 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void onSignInSuccess() {
+        mSignInView.hideLoader();
+        mSignInView.navigateToMainActivity();
         Log.d("Presenter", "Signin successful");
     }
 
     @Override
     public void onSignInFailure(String errorMessage) {
+        mSignInView.hideLoader();
         Log.e("Presenter", errorMessage);
     }
 }
