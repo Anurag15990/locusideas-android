@@ -4,8 +4,8 @@ import com.android.locusideas.core.data.auth.AuthDataContract;
 import com.android.locusideas.core.data.auth.AuthDataManager;
 import com.android.locusideas.core.data.auth.local.AuthLocalDataService;
 import com.android.locusideas.core.data.auth.remote.AuthRemoteDataService;
+import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.core.utils.injection.PerComponent;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -17,8 +17,8 @@ public class AuthModule {
 
     @Provides
     @PerComponent
-    public AuthDataContract.Services providesAuthDataManager(AuthRemoteDataService authRemoteDataService, AuthLocalDataService authLocalDataService){
-        return new AuthDataManager(authRemoteDataService, authLocalDataService);
+    public AuthDataContract.Services providesAuthDataManager(AuthRemoteDataService authRemoteDataService, AuthLocalDataService authLocalDataService, SharedPreferencesManager sharedPreferencesManager){
+        return new AuthDataManager(authRemoteDataService, authLocalDataService, sharedPreferencesManager);
     }
 
     @Provides
