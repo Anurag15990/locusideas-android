@@ -28,7 +28,7 @@ public class RequirementsFragment extends BaseHomeFragment {
     }
 
     public static TabIcon getTabIcon(){
-        return new TabIcon(R.string.requirements_str, R.drawable.ic_edit_requirements_black_24dp, android.R.color.holo_blue_light);
+        return new TabIcon(R.string.requirements_tab_title, R.drawable.ic_edit_requirements_black_24dp, android.R.color.holo_blue_light);
     }
 
     @Nullable

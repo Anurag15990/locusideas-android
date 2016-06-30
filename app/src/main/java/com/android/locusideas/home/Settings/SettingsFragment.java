@@ -27,7 +27,7 @@ public class SettingsFragment extends BaseHomeFragment {
     }
 
     public static TabIcon getTabIcon(){
-        return new TabIcon(R.string.settings_str, R.drawable.ic_settings_black_24dp, android.R.color.holo_blue_light);
+        return new TabIcon(R.string.settings_tab_title, R.drawable.ic_settings_black_24dp, android.R.color.holo_blue_light);
     }
 
     @Nullable

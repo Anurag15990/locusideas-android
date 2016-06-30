@@ -27,7 +27,7 @@ public class DesignersFragment extends BaseHomeFragment {
     }
 
     public static TabIcon getTabIcon() {
-        return new TabIcon(R.string.designers_str, R.drawable.ic_group_black_24dp, android.R.color.holo_blue_light);
+        return new TabIcon(R.string.designers_tab_title, R.drawable.ic_group_black_24dp, android.R.color.holo_blue_light);
     }
 
     @Nullable
