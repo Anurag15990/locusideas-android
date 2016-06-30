@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.android.locusideas.auth.SignIn.SignInActivity">
+    tools:context="com.android.locusideas.auth.signIn.SignInActivity">
 
     <FrameLayout
         android:id="@+id/contentFrame"

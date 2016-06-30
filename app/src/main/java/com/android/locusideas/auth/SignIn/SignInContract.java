@@ -1,4 +1,4 @@
-package com.android.locusideas.auth.SignIn;
+package com.android.locusideas.auth.signIn;
 
 import com.android.locusideas.core.ui.BasePresenter;
 import com.android.locusideas.core.ui.BaseView;
