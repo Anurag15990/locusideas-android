@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.SplashScreen.injection.DaggerSplashScreenComponent;
+import com.android.locusideas.SplashScreen.injection.SplashScreenComponent;
 import com.android.locusideas.SplashScreen.injection.SplashScreenModule;
 import com.android.locusideas.auth.AuthActivity;
 import com.android.locusideas.home.MainShellActivity;
@@ -24,15 +25,18 @@ public class SplashScreenFragment extends Fragment implements SplashScreenContra
     @Inject
     SplashScreenContract.Presenter presenter;
 
+    SplashScreenComponent splashScreenComponent;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_splash_screen, container, false);
 
-        DaggerSplashScreenComponent.builder().applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
+        splashScreenComponent = DaggerSplashScreenComponent.builder().applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
                 .splashScreenModule(new SplashScreenModule(this, new Handler()))
-                .build()
-                .inject(this);
+                .build();
+
+        splashScreenComponent.inject(this);
 
         return view;
     }
@@ -41,6 +45,12 @@ public class SplashScreenFragment extends Fragment implements SplashScreenContra
     public void onResume() {
         super.onResume();
         presenter.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        splashScreenComponent = null;
     }
 
     @Override
