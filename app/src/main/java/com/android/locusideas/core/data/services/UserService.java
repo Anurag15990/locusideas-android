@@ -1,13 +1,11 @@
-package com.android.locusideas.core.data.coreServices;
+package com.android.locusideas.core.data.services;
 
 import com.android.locusideas.requests.user.FacebookAuthRequest;
 import com.android.locusideas.requests.user.LoginRequest;
 import com.android.locusideas.requests.user.RegisterRequest;
 import com.android.locusideas.responses.TokenResponse;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**

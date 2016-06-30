@@ -1,8 +1,8 @@
 package com.android.locusideas.core.data.auth.remote;
 
 import com.android.locusideas.core.data.auth.AuthDataContract;
-import com.android.locusideas.core.data.coreServices.UserService;
 import com.android.locusideas.core.data.models.ApiError;
+import com.android.locusideas.core.data.services.UserService;
 import com.android.locusideas.requests.user.FacebookAuthRequest;
 import com.android.locusideas.requests.user.LoginRequest;
 import com.android.locusideas.requests.user.RegisterRequest;
