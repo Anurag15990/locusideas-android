@@ -37,6 +37,7 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void onSignInViaFacebook(AccessToken accessToken, String fbId){
+        mSignInView.showLoader();
         mAuthDataManager.onSignInViaFacebook(accessToken, fbId);
     }
 
