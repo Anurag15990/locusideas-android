@@ -13,5 +13,10 @@ public interface SignUpContract {
     }
 
     interface View extends BaseView{
+        void showLoader();
+
+        void hideLoader();
+
+        void navigateToMainActivity();
     }
 }
