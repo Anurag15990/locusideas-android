@@ -26,6 +26,7 @@ public class SplashScreenFragment extends Fragment implements SplashScreenContra
     SplashScreenContract.Presenter presenter;
 
     SplashScreenComponent splashScreenComponent;
+    Handler handler;
 
     @Nullable
     @Override
@@ -33,11 +34,11 @@ public class SplashScreenFragment extends Fragment implements SplashScreenContra
         View view = inflater.inflate(R.layout.fragment_splash_screen, container, false);
 
         splashScreenComponent = DaggerSplashScreenComponent.builder().applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
-                .splashScreenModule(new SplashScreenModule(this, new Handler()))
+                .splashScreenModule(new SplashScreenModule(this))
                 .build();
 
         splashScreenComponent.inject(this);
-
+        handler = new Handler();
         return view;
     }
 
@@ -60,16 +61,33 @@ public class SplashScreenFragment extends Fragment implements SplashScreenContra
 
     @Override
     public void navigateToMainActivity(){
-        Intent intent = new Intent(getActivity(), MainShellActivity.class);
-        getActivity().startActivity(intent);
-        getActivity().finish();
+        handler.postDelayed(new NavigatationRunnable(this, new Intent(getActivity(), MainShellActivity.class)), 2000);
     }
 
     @Override
     public void navigateToAuthActivity(){
-        Intent intent = new Intent(getActivity(), AuthActivity.class);
-        getActivity().startActivity(intent);
-        getActivity().finish();
+        handler.postDelayed(new NavigatationRunnable(this, new Intent(getActivity(), AuthActivity.class)), 2000);
+    }
+
+    private static class NavigatationRunnable implements Runnable{
+
+        Intent nextActivity;
+        Fragment currentFragment;
+
+        public NavigatationRunnable(Fragment currentFragment, Intent nextActivity){
+            this.nextActivity = nextActivity;
+            this.currentFragment = currentFragment;
+        }
+
+        @Override
+        public void run() {
+            if(currentFragment.isAdded()){
+                currentFragment.getActivity().startActivity(nextActivity);
+                currentFragment.getActivity().finish();
+            }
+            currentFragment = null;
+        }
+
     }
 
 }
