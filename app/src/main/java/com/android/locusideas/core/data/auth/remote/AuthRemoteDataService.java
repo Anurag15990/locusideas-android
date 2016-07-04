@@ -2,11 +2,12 @@ package com.android.locusideas.core.data.auth.remote;
 
 import com.android.locusideas.core.data.auth.AuthDataContract;
 import com.android.locusideas.core.data.models.ApiError;
+import com.android.locusideas.core.data.models.requests.FacebookAuthRequest;
+import com.android.locusideas.core.data.models.requests.LoginRequest;
+import com.android.locusideas.core.data.models.requests.RegisterRequest;
+import com.android.locusideas.core.data.models.responses.TokenResponse;
 import com.android.locusideas.core.data.services.UserService;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
-import com.android.locusideas.requests.user.FacebookAuthRequest;
-import com.android.locusideas.requests.user.LoginRequest;
-import com.android.locusideas.requests.user.RegisterRequest;
 import com.android.locusideas.responses.TokenResponse;
 import com.android.locusideas.routers.ServiceGenerator;
 import com.facebook.AccessToken;
