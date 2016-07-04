@@ -1,4 +1,4 @@
-package com.android.locusideas.SplashScreen.injection;
+package com.android.locusideas.SplashScreen.di;
 
 import com.android.locusideas.SplashScreen.SplashScreenPresenter;
 import com.android.locusideas.core.utils.SharedPreferencesManager;

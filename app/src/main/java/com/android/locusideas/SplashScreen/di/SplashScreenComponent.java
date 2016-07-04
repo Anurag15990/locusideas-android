@@ -1,4 +1,4 @@
-package com.android.locusideas.SplashScreen.injection;
+package com.android.locusideas.SplashScreen.di;
 
 import com.android.locusideas.ApplicationComponent;
 import com.android.locusideas.SplashScreen.SplashScreenActivity;
