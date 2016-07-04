@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.locusideas.adapter.CustomPagerAdapter;
-import com.android.locusideas.auth.SignIn.SignInActivity;
-import com.android.locusideas.auth.SignUp.SignUpActivity;
+import com.android.locusideas.auth.signIn.SignInActivity;
+import com.android.locusideas.auth.signUp.SignUpActivity;
 import com.android.locusideas.auth.injection.AuthModule;
 import com.android.locusideas.auth.injection.DaggerAuthComponent;
 import com.locusideas.locusideas.R;

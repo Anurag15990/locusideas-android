@@ -1,6 +1,6 @@
-package com.android.locusideas.auth.SignIn.injection;
+package com.android.locusideas.auth.signIn.injection;
 
-import com.android.locusideas.auth.SignIn.SignInFragment;
+import com.android.locusideas.auth.signIn.SignInFragment;
 import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.utils.injection.PerActivity;
 import dagger.Component;

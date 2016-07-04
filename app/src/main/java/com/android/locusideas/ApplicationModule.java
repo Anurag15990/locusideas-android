@@ -3,6 +3,7 @@ package com.android.locusideas;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
+import com.android.locusideas.core.utils.mvp.PresenterManager;
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
@@ -35,6 +36,12 @@ public class ApplicationModule {
     @Singleton
     public SharedPreferencesManager getSharedPreferenceManager(SharedPreferences sp){
         return new SharedPreferencesManager(sp);
+    }
+
+    @Provides
+    @Singleton
+    public PresenterManager providesPresenterManager(){
+        return new PresenterManager();
     }
 
 }
