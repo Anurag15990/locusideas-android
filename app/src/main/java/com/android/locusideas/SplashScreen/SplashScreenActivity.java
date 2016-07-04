@@ -17,7 +17,7 @@ import com.locusideas.locusideas.R;
 /**
  * Created on 30/06/16.
  */
-public class SplashScreenActivity extends AppCompatActivity implements SplashScreenContract.View{
+public class SplashScreenActivity extends AppCompatActivity implements SplashScreenView {
 
     SplashScreenPresenter presenter;
 
@@ -78,11 +78,6 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         splashScreenComponent = null;
         handler = null;
         presenterManager = null;
-    }
-
-    @Override
-    public boolean isActive() {
-        return false;
     }
 
     @Override

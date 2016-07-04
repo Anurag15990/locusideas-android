@@ -6,7 +6,7 @@ import com.android.locusideas.core.utils.mvp.BasePresenter;
 /**
  * Created on 30/06/16.
  */
-public class SplashScreenPresenter extends BasePresenter<SplashScreenContract.View> {
+public class SplashScreenPresenter extends BasePresenter<SplashScreenView> {
 
     public final SharedPreferencesManager sharedPreferenceManager;
 
