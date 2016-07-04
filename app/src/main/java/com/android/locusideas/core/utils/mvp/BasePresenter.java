@@ -5,7 +5,7 @@ package com.android.locusideas.core.utils.mvp;
  */
 public abstract class BasePresenter<V> {
 
-    V view;
+    protected V view;
 
     final public void bindView(V view){
         this.view = view;
@@ -21,4 +21,9 @@ public abstract class BasePresenter<V> {
         }
         return false;
     }
+
+    public void onResume(){
+
+    }
+
 }
