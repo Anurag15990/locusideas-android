@@ -10,17 +10,18 @@ import com.android.locusideas.SplashScreen.injection.DaggerSplashScreenComponent
 import com.android.locusideas.SplashScreen.injection.SplashScreenComponent;
 import com.android.locusideas.SplashScreen.injection.SplashScreenModule;
 import com.android.locusideas.auth.AuthActivity;
+import com.android.locusideas.core.utils.mvp.PresenterManager;
 import com.android.locusideas.home.MainShellActivity;
 import com.locusideas.locusideas.R;
-import javax.inject.Inject;
 
 /**
  * Created on 30/06/16.
  */
 public class SplashScreenActivity extends AppCompatActivity implements SplashScreenContract.View{
 
-    @Inject
-    SplashScreenContract.Presenter presenter;
+    SplashScreenPresenter presenter;
+
+    PresenterManager presenterManager;
 
     SplashScreenComponent splashScreenComponent;
 
@@ -32,29 +33,43 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        inject();
-        handler = new Handler();
-    }
 
-    public void inject(){
-        splashScreenComponent = DaggerSplashScreenComponent.builder().applicationComponent(((LocusApplication)getApplicationContext()).getApplicationComponent())
-                .splashScreenModule(new SplashScreenModule(this))
+        //TODO move to BaseActivity
+        presenterManager = ((LocusApplication)getApplicationContext()).getPresenterManager();
+
+        splashScreenComponent = DaggerSplashScreenComponent.builder()
+                .applicationComponent(((LocusApplication) getApplicationContext()).getApplicationComponent())
+                .splashScreenModule(new SplashScreenModule())
                 .build();
 
-        splashScreenComponent.inject(this);
+        if(savedInstanceState != null) {
+            presenter = presenterManager.restorePresenter(savedInstanceState);
+        } else {
+            presenter = splashScreenComponent.getPresenter();
+        }
+
+        handler = new Handler();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.start();
+        presenter.bindView(this);
         isPaused = false;
+        presenter.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        presenter.unBindView();
         isPaused = true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        presenterManager.savePresenter(presenter, outState);
     }
 
     @Override
@@ -62,6 +77,7 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
         super.onDestroy();
         splashScreenComponent = null;
         handler = null;
+        presenterManager = null;
     }
 
     @Override

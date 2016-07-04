@@ -1,6 +1,5 @@
 package com.android.locusideas.SplashScreen.injection;
 
-import com.android.locusideas.SplashScreen.SplashScreenContract;
 import com.android.locusideas.SplashScreen.SplashScreenPresenter;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.core.utils.injection.PerActivity;
@@ -13,16 +12,10 @@ import dagger.Provides;
 @Module
 public class SplashScreenModule {
 
-    SplashScreenContract.View view;
-
-    public SplashScreenModule(SplashScreenContract.View view){
-        this.view = view;
-    }
-
     @Provides
     @PerActivity
-    public SplashScreenContract.Presenter providesPresenter(SharedPreferencesManager sharedPreferencesManager){
-        return new SplashScreenPresenter(view, sharedPreferencesManager);
+    public SplashScreenPresenter providesPresenter(SharedPreferencesManager sharedPreferencesManager){
+        return new SplashScreenPresenter(sharedPreferencesManager);
     }
 
 }

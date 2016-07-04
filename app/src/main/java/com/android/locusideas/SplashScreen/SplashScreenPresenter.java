@@ -1,23 +1,21 @@
 package com.android.locusideas.SplashScreen;
 
 import com.android.locusideas.core.utils.SharedPreferencesManager;
+import com.android.locusideas.core.utils.mvp.BasePresenter;
 
 /**
  * Created on 30/06/16.
  */
-public class SplashScreenPresenter implements SplashScreenContract.Presenter {
+public class SplashScreenPresenter extends BasePresenter<SplashScreenContract.View> {
 
     public final SharedPreferencesManager sharedPreferenceManager;
-    SplashScreenContract.View view;
 
-    public SplashScreenPresenter(SplashScreenContract.View view,
-                                 SharedPreferencesManager sharedPreferencesManager){
-        this.view = view;
+    public SplashScreenPresenter(SharedPreferencesManager sharedPreferencesManager){
         this.sharedPreferenceManager = sharedPreferencesManager;
     }
 
     @Override
-    public void start() {
+    public void onResume() {
         navigateBasedOnLoginStatus();
     }
 
