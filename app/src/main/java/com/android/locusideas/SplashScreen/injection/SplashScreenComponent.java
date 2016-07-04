@@ -1,7 +1,7 @@
 package com.android.locusideas.SplashScreen.injection;
 
 import com.android.locusideas.ApplicationComponent;
-import com.android.locusideas.SplashScreen.SplashScreenFragment;
+import com.android.locusideas.SplashScreen.SplashScreenActivity;
 import com.android.locusideas.core.utils.injection.PerActivity;
 import dagger.Component;
 
@@ -11,5 +11,5 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = {ApplicationComponent.class}, modules = {SplashScreenModule.class})
 public interface SplashScreenComponent {
-    void inject(SplashScreenFragment splashScreenFragment);
+    void inject(SplashScreenActivity splashScreenActivity);
 }
