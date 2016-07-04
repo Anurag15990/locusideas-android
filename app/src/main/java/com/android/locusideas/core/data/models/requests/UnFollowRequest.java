@@ -1,4 +1,4 @@
-package com.android.locusideas.requests.user;
+package com.android.locusideas.core.data.models.requests;
 
 /**
  * Created by anurag on 4/29/16.
