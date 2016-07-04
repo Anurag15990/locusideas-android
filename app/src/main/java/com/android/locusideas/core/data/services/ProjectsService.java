@@ -5,7 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
- * Created by satyaiyengar on 13/06/16.
+ * Created on 13/06/16.
  */
 
 public interface ProjectsService {
