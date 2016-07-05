@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.locusideas.core.ui.TabIcon;
 import com.android.locusideas.core.ui.widgets.TextViewPlus;
 import com.android.locusideas.home.BaseHomeFragment;
 import com.locusideas.locusideas.R;
@@ -15,21 +14,11 @@ import butterknife.ButterKnife;
 /**
  * Created on 25/06/16.
  */
-
-
 public class RequirementsFragment extends BaseHomeFragment {
 
     //TODO added for testing remove
     @BindView(R.id.fragment_name)
     TextViewPlus fragmentName;
-
-    public static RequirementsFragment getInstance(){
-        return new RequirementsFragment();
-    }
-
-    public static TabIcon getTabIcon(){
-        return new TabIcon(R.string.requirements_tab_title, R.drawable.ic_edit_requirements_black_24dp, android.R.color.holo_blue_light);
-    }
 
     @Nullable
     @Override

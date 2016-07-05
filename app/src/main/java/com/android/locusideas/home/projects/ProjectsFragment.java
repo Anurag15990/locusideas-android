@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.locusideas.LocusApplication;
-import com.android.locusideas.core.ui.TabIcon;
 import com.android.locusideas.home.BaseHomeFragment;
 import com.android.locusideas.home.projects.injection.DaggerProjectsComponent;
 import com.android.locusideas.home.projects.injection.ProjectsModule;
@@ -22,7 +21,6 @@ import butterknife.ButterKnife;
 /**
  * Created on 25/06/16.
  */
-
 public class ProjectsFragment extends BaseHomeFragment implements ProjectsContract.View{
 
     @BindView(R.id.projects_recycler_view)
@@ -32,19 +30,6 @@ public class ProjectsFragment extends BaseHomeFragment implements ProjectsContra
 
     @Inject
     ProjectsContract.Presenter presenter;
-
-    static ProjectsFragment instance;
-
-    public static ProjectsFragment getInstance(){
-        if (instance == null){
-            instance = new ProjectsFragment();
-        }
-        return instance;
-    }
-
-    public static TabIcon getTabIcon(){
-        return new TabIcon(R.string.projects_tab_title, R.drawable.ic_trending_black_24dp, android.R.color.holo_blue_light);
-    }
 
     @Nullable
     @Override
