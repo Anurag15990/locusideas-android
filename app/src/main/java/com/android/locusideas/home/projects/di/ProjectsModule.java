@@ -1,4 +1,4 @@
-package com.android.locusideas.home.projects.injection;
+package com.android.locusideas.home.projects.di;
 
 import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.core.utils.injection.PerActivity;
