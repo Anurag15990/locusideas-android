@@ -5,7 +5,7 @@ import com.android.locusideas.core.data.models.ApiError;
 import com.android.locusideas.core.data.models.requests.FacebookAuthRequest;
 import com.android.locusideas.core.data.models.requests.LoginRequest;
 import com.android.locusideas.core.data.models.requests.RegisterRequest;
-import com.android.locusideas.core.data.models.responses.TokenResponse;
+import com.android.locusideas.core.data.models.response.TokenResponse;
 import com.android.locusideas.core.data.services.UserService;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.routers.ServiceGenerator;
