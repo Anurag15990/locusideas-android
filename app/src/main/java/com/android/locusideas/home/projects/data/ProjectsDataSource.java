@@ -1,6 +1,6 @@
 package com.android.locusideas.home.projects.data;
 
-import com.android.locusideas.home.projects.ProjectsContract;
+import com.android.locusideas.home.projects.ProjectsPresenter;
 
 /**
  * Created on 28/06/16.
@@ -8,11 +8,10 @@ import com.android.locusideas.home.projects.ProjectsContract;
 
 public interface ProjectsDataSource {
 
-    void setProjectsPresenter(ProjectsContract.Presenter projectsPresenter);
+    void setProjectsPresenter(ProjectsPresenter projectsPresenter);
 
     void likeProjectWithId(String projectId);
 
     void loadProjects();
-
 
 }

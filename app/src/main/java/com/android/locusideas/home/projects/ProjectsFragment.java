@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.home.BaseHomeFragment;
 import com.android.locusideas.home.projects.di.DaggerProjectsComponent;
+import com.android.locusideas.home.projects.di.ProjectsComponent;
 import com.android.locusideas.home.projects.di.ProjectsModule;
 import com.android.locusideas.home.projects.models.Project;
 import com.locusideas.locusideas.R;
@@ -21,15 +22,29 @@ import butterknife.ButterKnife;
 /**
  * Created on 25/06/16.
  */
-public class ProjectsFragment extends BaseHomeFragment implements ProjectsContract.View{
+public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPresenter> implements ProjectsView{
 
     @BindView(R.id.projects_recycler_view)
     RecyclerView projectsRecyclerView;
 
     ProjectsAdapter projectsAdapter;
 
-    @Inject
-    ProjectsContract.Presenter presenter;
+    ProjectsComponent projectsComponent;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        projectsComponent  = DaggerProjectsComponent.builder()
+                .applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
+                .projectsModule(new ProjectsModule(this))
+                .build();
+
+        if(presenter == null){
+            presenter = projectsComponent.getProjectsPresenter();
+        }
+
+    }
 
     @Nullable
     @Override
@@ -42,12 +57,6 @@ public class ProjectsFragment extends BaseHomeFragment implements ProjectsContra
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        DaggerProjectsComponent.builder()
-                .applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
-                .projectsModule(new ProjectsModule(this))
-                .build()
-                .inject(this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         projectsAdapter = new ProjectsAdapter(getActivity(), new ProjectsAdapterCallbacksImpl());
@@ -72,18 +81,19 @@ public class ProjectsFragment extends BaseHomeFragment implements ProjectsContra
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onDestroy() {
+        super.onDestroy();
+        projectsComponent = null;
+    }
+
+    @Override
+    protected ProjectsView getMVPView() {
+        return this;
     }
 
     @Override
     public void refresh() {
         presenter.loadProjects();
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 
     private static class ProjectsAdapterCallbacksImpl implements ProjectsAdapter.ProjectsAdapterCallbacks{

@@ -2,8 +2,8 @@ package com.android.locusideas.home.projects.di;
 
 import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.core.utils.injection.PerActivity;
-import com.android.locusideas.home.projects.ProjectsContract;
 import com.android.locusideas.home.projects.ProjectsPresenter;
+import com.android.locusideas.home.projects.ProjectsView;
 import com.android.locusideas.home.projects.data.ProjectsDataManager;
 import com.android.locusideas.home.projects.data.ProjectsDataSource;
 import com.android.locusideas.home.projects.data.remote.ProjectsRemoteDataService;
@@ -16,15 +16,15 @@ import dagger.Provides;
 @Module
 public class ProjectsModule{
 
-    private ProjectsContract.View view;
+    private ProjectsView view;
 
-    public ProjectsModule(ProjectsContract.View view){
+    public ProjectsModule(ProjectsView view){
         this.view = view;
     }
 
     @Provides
     @PerActivity
-    public ProjectsContract.Presenter providesPresenter(ProjectsDataSource projectsDataSource){
+    public ProjectsPresenter providesPresenter(ProjectsDataSource projectsDataSource){
         return new ProjectsPresenter(view, projectsDataSource);
     }
 
