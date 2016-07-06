@@ -12,7 +12,7 @@ import com.android.locusideas.core.utils.mvp.PresenterManager;
 
 public abstract class BaseActivity<V, P extends BasePresenter<V>> extends AppCompatActivity{
 
-    protected PresenterManager presenterManager;
+    private PresenterManager presenterManager;
     protected P presenter;
     protected V view;
 

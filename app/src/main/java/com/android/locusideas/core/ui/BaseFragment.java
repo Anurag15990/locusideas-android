@@ -11,7 +11,7 @@ import com.android.locusideas.core.utils.mvp.PresenterManager;
  * Created on 05/07/16.
  */
 public abstract class BaseFragment<V, P extends BasePresenter<V>> extends Fragment{
-    protected PresenterManager presenterManager;
+    private PresenterManager presenterManager;
     protected P presenter;
     protected V view;
 
