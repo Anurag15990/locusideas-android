@@ -9,6 +9,7 @@ import java.util.List;
 public class Project {
     String id;
     String title;
+    String description;
     String createdAt;
     String updatedAt;
     Owner owner;
@@ -150,6 +151,10 @@ public class Project {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getDescription(){
+        return description;
     }
 
     public String getCreatedAt() {
