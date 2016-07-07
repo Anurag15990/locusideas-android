@@ -23,12 +23,15 @@ import butterknife.OnClick;
 
 class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder>{
 
-    private final ProjectsAdapterCallbacks projectsAdapterCallbacks;
+    private ProjectsAdapterCallbacks projectsAdapterCallbacks;
     private List<Project> projects = new ArrayList<>();
     private Context appContext;
 
-    ProjectsAdapter(Context appContext, ProjectsAdapterCallbacks projectsAdapterCallbacks){
+    ProjectsAdapter(Context appContext){
         this.appContext = appContext;
+    }
+
+    public void setProjectsAdapterCallbacks(ProjectsAdapterCallbacks projectsAdapterCallbacks) {
         this.projectsAdapterCallbacks = projectsAdapterCallbacks;
     }
 
@@ -110,6 +113,12 @@ class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder>{
         return projects.size();
     }
 
+    public void onDestroy(){
+        projectsAdapterCallbacks.onDestroy();
+        projectsAdapterCallbacks = null;
+        appContext = null;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private final ActionCallbacks actionCallbacks;
@@ -149,6 +158,7 @@ class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ViewHolder>{
 
     interface ProjectsAdapterCallbacks extends ActionCallbacks{
         void onAdapterEmpty();
+        void onDestroy();
     }
 
     interface ActionCallbacks{
