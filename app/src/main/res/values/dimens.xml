@@ -8,6 +8,7 @@
 
     <fraction name="header_aspectRatio_16_by_9">178%</fraction>
 
+    <dimen name="spacing_4dp">4dp</dimen>
     <dimen name="spacing_8dp">8dp</dimen>
     <dimen name="spacing_16dp">16dp</dimen>
     <dimen name="spacing_24dp">24dp</dimen>
