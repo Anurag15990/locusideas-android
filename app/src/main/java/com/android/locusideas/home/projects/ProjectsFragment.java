@@ -1,5 +1,7 @@
 package com.android.locusideas.home.projects;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +15,10 @@ import com.android.locusideas.home.projects.di.DaggerProjectsComponent;
 import com.android.locusideas.home.projects.di.ProjectsComponent;
 import com.android.locusideas.home.projects.di.ProjectsModule;
 import com.android.locusideas.home.projects.models.Project;
+import com.android.locusideas.home.projects.project.ProjectActivity;
+import com.android.locusideas.home.projects.project.ProjectHolder;
 import com.locusideas.locusideas.R;
 import java.util.List;
-import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,15 +31,17 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
     RecyclerView projectsRecyclerView;
 
     ProjectsAdapter projectsAdapter;
-
     ProjectsComponent projectsComponent;
+    LocusApplication locusApplication;
+    ProjectHolder projectHolder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locusApplication = ((LocusApplication)getActivity().getApplicationContext());
 
         projectsComponent  = DaggerProjectsComponent.builder()
-                .applicationComponent(((LocusApplication)getActivity().getApplicationContext()).getApplicationComponent())
+                .applicationComponent(locusApplication.getApplicationComponent())
                 .projectsModule(new ProjectsModule(this))
                 .build();
 
@@ -44,6 +49,7 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
             presenter = projectsComponent.getProjectsPresenter();
         }
 
+        projectHolder = locusApplication.getProjectHolder();
     }
 
     @Nullable
@@ -59,7 +65,8 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        projectsAdapter = new ProjectsAdapter(getActivity(), new ProjectsAdapterCallbacksImpl());
+        projectsAdapter = new ProjectsAdapter(getActivity());
+        projectsAdapter.setProjectsAdapterCallbacks(new ProjectsAdapterCallbacksImpl(getActivity(),projectsAdapter, projectHolder));
         projectsRecyclerView.setLayoutManager(mLayoutManager);
         projectsRecyclerView.setAdapter(projectsAdapter);
         presenter.loadProjects();
@@ -83,6 +90,8 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
     @Override
     public void onDestroy() {
         super.onDestroy();
+        projectsAdapter.onDestroy();
+        projectsAdapter = null;
         projectsComponent = null;
     }
 
@@ -97,6 +106,15 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
     }
 
     private static class ProjectsAdapterCallbacksImpl implements ProjectsAdapter.ProjectsAdapterCallbacks{
+        ProjectsAdapter projectsAdapter;
+        ProjectHolder projectHolder;
+        Context appContext;
+
+        public ProjectsAdapterCallbacksImpl(Context appContext,ProjectsAdapter projectsAdapter, ProjectHolder projectHolder){
+            this.projectsAdapter = projectsAdapter;
+            this.projectHolder = projectHolder;
+            this.appContext = appContext;
+        }
 
         @Override
         public void onAdapterEmpty() {
@@ -105,12 +123,21 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
 
         @Override
         public void onItemClick(int itemPosition) {
-
+            projectHolder.setProject(projectsAdapter.getItemAt(itemPosition));
+            Intent projectIntent = new Intent(appContext, ProjectActivity.class);
+            appContext.startActivity(projectIntent);
         }
 
         @Override
         public void onActionLikeClick(int itemPosition) {
 
+        }
+
+        @Override
+        public void onDestroy() {
+            appContext = null;
+            projectHolder = null;
+            projectsAdapter = null;
         }
 
     }
