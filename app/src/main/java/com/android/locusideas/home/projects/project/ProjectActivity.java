@@ -2,20 +2,14 @@ package com.android.locusideas.home.projects.project;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.core.ui.BaseActivity;
-import com.android.locusideas.core.ui.widgets.TextViewPlus;
 import com.android.locusideas.home.projects.models.Project;
 import com.android.locusideas.home.projects.project.di.DaggerProjectComponent;
 import com.android.locusideas.home.projects.project.di.ProjectComponent;
 import com.android.locusideas.home.projects.project.di.ProjectModule;
-import com.bumptech.glide.Glide;
 import com.locusideas.locusideas.R;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -23,18 +17,6 @@ import butterknife.ButterKnife;
  */
 
 public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter> implements ProjectView {
-
-    @BindView(R.id.project_owner_avatar)
-    ImageView ownerAvatar;
-
-    @BindView(R.id.project_owner_name)
-    TextViewPlus ownerName;
-
-    @BindView(R.id.project_title)
-    TextViewPlus projectTitle;
-
-    @BindView(R.id.project_description)
-    TextViewPlus projectDescription;
 
     ProjectComponent projectComponent;
     ProjectHolder projectHolder;
@@ -66,15 +48,6 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
         }
 
         project = projectHolder.getProject();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Glide.with(this).load(project.getOwner().getPicture().getUrl()).into(ownerAvatar);
-        ownerName.setText(project.getOwner().getName().getFirstName());
-        projectTitle.setText(project.getTitle());
-        projectDescription.setText(project.getDescription());
     }
 
     @Override

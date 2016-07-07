@@ -5,39 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.android.locusideas.core.ui.widgets.TextViewPlus
-        android:id="@+id/project_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_8dp"
-        android:layout_marginLeft="@dimen/spacing_8dp"
-        android:textSize="16sp"
-        />
-
-    <com.android.locusideas.core.ui.widgets.TextViewPlus
-        android:id="@+id/project_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginTop="@dimen/spacing_4dp"
-        android:layout_marginLeft="@dimen/spacing_8dp"
-        android:layout_below="@+id/project_title"/>
-
-    <ImageView
-        android:id="@+id/project_owner_avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/project_description"
-        android:layout_marginLeft="@dimen/spacing_8dp"/>
-
-    <com.android.locusideas.core.ui.widgets.TextViewPlus
-        android:id="@+id/project_owner_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/project_owner_avatar"
-        android:layout_alignTop="@+id/project_owner_avatar"
-        android:layout_alignBottom="@+id/project_owner_avatar"
-        android:gravity="center"
-        android:textSize="14sp"/>
-
 </RelativeLayout>
