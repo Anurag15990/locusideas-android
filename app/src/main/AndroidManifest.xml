@@ -9,10 +9,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="110ef90a866bd74984aa1de0f360dcf51cd3e9c0" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
         <activity
             android:name="com.android.locusideas.auth.AuthActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity
             android:name="com.android.locusideas.auth.signIn.SignInActivity"
             android:label="@string/title_activity_sign_in"
@@ -21,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.locusideas.auth.AuthActivity" />
         </activity>
+
         <activity
             android:name="com.android.locusideas.auth.signUp.SignUpActivity"
             android:label="@string/title_activity_sign_up"
@@ -30,11 +42,13 @@
                 android:value="com.android.locusideas.auth.AuthActivity" />
         </activity>
 
-        <activity android:name="com.android.locusideas.home.MainShellActivity"
+        <activity
+            android:name="com.android.locusideas.home.MainShellActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name="com.android.locusideas.SplashScreen.SplashScreenActivity"
+        <activity
+            android:name="com.android.locusideas.SplashScreen.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,17 +57,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.facebook.FacebookActivity"
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="110ef90a866bd74984aa1de0f360dcf51cd3e9c0" />
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name="com.android.locusideas.home.projects.project.ProjectActivity">
+
+        </activity>
 
     </application>
 
