@@ -4,7 +4,6 @@ import com.android.locusideas.ApplicationComponent;
 import com.android.locusideas.core.utils.injection.PerActivity;
 import com.android.locusideas.home.projects.ProjectsFragment;
 import com.android.locusideas.home.projects.ProjectsPresenter;
-
 import dagger.Component;
 
 /**

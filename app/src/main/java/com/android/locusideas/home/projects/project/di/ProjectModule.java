@@ -1,6 +1,13 @@
 package com.android.locusideas.home.projects.project.di;
 
+import com.android.locusideas.core.utils.SharedPreferencesManager;
+import com.android.locusideas.core.utils.injection.PerActivity;
 import com.android.locusideas.core.utils.injection.PerComponent;
+import com.android.locusideas.home.projects.data.ProjectsDataManager;
+import com.android.locusideas.home.projects.data.ProjectsDataSource;
+import com.android.locusideas.home.projects.data.remote.ProjectsRemoteDataService;
+import com.android.locusideas.home.projects.di.ProjectsModule;
+import com.android.locusideas.home.projects.project.ProjectHolder;
 import com.android.locusideas.home.projects.project.ProjectPresenter;
 import com.android.locusideas.home.projects.project.ProjectView;
 
@@ -20,9 +27,21 @@ public class ProjectModule {
     }
 
     @Provides
-    @PerComponent
-    public ProjectPresenter providesProjectPresenter(){
-        return new ProjectPresenter();
+    @PerActivity
+    public ProjectPresenter providesProjectPresenter(ProjectsDataSource projectsDataSource, ProjectHolder projectHolder){
+        return new ProjectPresenter(projectsDataSource, projectHolder);
+    }
+
+    @Provides
+    @PerActivity
+    public ProjectsDataSource providesProjectsDataSource(ProjectsRemoteDataService projectsRemoteDataService){
+        return new ProjectsDataManager(projectsRemoteDataService);
+    }
+
+    @Provides
+    @PerActivity
+    public ProjectsRemoteDataService providesProjectsRemoteDataService(SharedPreferencesManager sharedPreferencesManager){
+        return new ProjectsRemoteDataService(sharedPreferencesManager);
     }
 
 }
