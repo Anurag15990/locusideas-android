@@ -3,7 +3,7 @@ package com.android.locusideas.core.utils.mvp;
 /**
  * Created on 04/07/16.
  */
-public abstract class BasePresenter<V> {
+public abstract class BasePresenter<V>{
 
     protected V view;
 
@@ -20,6 +20,10 @@ public abstract class BasePresenter<V> {
             return true;
         }
         return false;
+    }
+
+    public void onCreate(){
+
     }
 
     public void onResume(){
