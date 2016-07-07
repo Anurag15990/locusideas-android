@@ -5,6 +5,7 @@ import com.android.locusideas.core.data.models.response.ProjectsResponse;
 import com.android.locusideas.core.utils.ApiCallback;
 import com.android.locusideas.home.projects.ProjectsPresenter;
 import com.android.locusideas.home.projects.data.remote.ProjectsRemoteDataService;
+import com.android.locusideas.home.projects.models.ProjectMediaResponse;
 
 /**
  * Created on 28/06/16.
@@ -32,6 +33,11 @@ public class ProjectsDataManager implements ProjectsDataSource {
     @Override
     public void loadProjects(){
         projectsRemoteDataService.loadProjects(new LoadDesignsCallback(this));
+    }
+
+    @Override
+    public void loadProjectMedias(String projectId, ApiCallback<ProjectMediaResponse> projectMediaResponseApiCallback){
+        projectsRemoteDataService.loadProjectMedias(projectId, projectMediaResponseApiCallback);
     }
 
     private static class LoadDesignsCallback implements ApiCallback<ProjectsResponse> {
