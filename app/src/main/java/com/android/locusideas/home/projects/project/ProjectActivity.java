@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.android.locusideas.LocusApplication;
@@ -45,6 +46,12 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
 
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
+
+    @BindView(R.id.project_share)
+    ImageView projectShareAction;
+
+    @BindView(R.id.project_owner_avatar)
+    ImageView projectOwnerAvatarCollapsed;
 
     ProjectComponent projectComponent;
     //TODO create component manager
@@ -124,6 +131,7 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     public void updateProjectView(Project project){
         collapsingToolbar.setTitle(project.getTitle());
         //collapsingToolbar.setTitleEnabled(false);
+        Glide.with(this).load(project.getOwner().getPicture().getUrl()).into(projectOwnerAvatarCollapsed);
         loadProjectPoster(project.getMedias().getInitial().get(0).getMedia().getUrl());
     }
 
@@ -144,11 +152,23 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
 
     @Override
     public void onToolbarCollapsed() {
+//        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+//
+//        projectOwnerAvatarCollapsed.startAnimation(fadeInAnimation);
+//        projectShareAction.startAnimation(fadeInAnimation);
+
+        projectOwnerAvatarCollapsed.setVisibility(View.VISIBLE);
+        projectShareAction.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onToolbarExpanded() {
-
+//        Animation fadeOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+//
+//        projectOwnerAvatarCollapsed.startAnimation(fadeOutAnimation);
+//        projectShareAction.startAnimation(fadeOutAnimation);
+        projectOwnerAvatarCollapsed.setVisibility(View.INVISIBLE);
+        projectShareAction.setVisibility(View.INVISIBLE);
     }
 
     private static class OnStateChangeListenerImpl implements ActivityUtils.AppBarOffsetChangedListener.OnStateChangedListener{
