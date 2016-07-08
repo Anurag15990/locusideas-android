@@ -11,9 +11,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.core.ui.BaseActivity;
-import com.android.locusideas.home.projects.di.DaggerProjectsComponent;
+import com.android.locusideas.core.utils.FontUtils;
 import com.android.locusideas.home.projects.di.ProjectsComponent;
-import com.android.locusideas.home.projects.di.ProjectsModule;
 import com.android.locusideas.home.projects.models.Project;
 import com.android.locusideas.home.projects.models.ProjectMedia;
 import com.android.locusideas.home.projects.project.di.DaggerProjectComponent;
@@ -21,9 +20,7 @@ import com.android.locusideas.home.projects.project.di.ProjectComponent;
 import com.android.locusideas.home.projects.project.di.ProjectModule;
 import com.bumptech.glide.Glide;
 import com.locusideas.locusideas.R;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -82,6 +79,9 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     private void initializeToolbar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        collapsingToolbar.setExpandedTitleTypeface(FontUtils.getTypeface(getAssets(),
+                getResources().getString(R.string.font_montserrat_semibold)));
     }
 
     private void initializeMediaList(){
