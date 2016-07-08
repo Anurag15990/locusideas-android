@@ -19,4 +19,6 @@
     <item name="secondary_opacity" format="float" type="dimen">0.54</item>
     <item name="tertiary_opacity" format="float" type="dimen">0.38</item>
 
+    <dimen name="toolbar_icon_size">24dp</dimen>
+
 </resources>
