@@ -62,7 +62,8 @@
         </activity>
 
         <activity
-            android:name="com.android.locusideas.home.projects.project.ProjectActivity">
+            android:name="com.android.locusideas.home.projects.project.ProjectActivity"
+            android:theme="@style/AppTheme.FitSystemWindows">
         </activity>
 
     </application>
