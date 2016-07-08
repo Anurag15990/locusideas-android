@@ -32,9 +32,9 @@ public class ActivityUtils {
     public static class AppBarOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
         int currentState;
 
-        final int EXPANDED = 1;
-        final int COLLAPSED = 0;
-        final int IDLE = -1;
+        public static final int EXPANDED = 1;
+        public static final int COLLAPSED = 0;
+        public static final int IDLE = -1;
         final OnStateChangedListener onStateChangedListener;
 
         public AppBarOffsetChangedListener(OnStateChangedListener onStateChangedListener){
