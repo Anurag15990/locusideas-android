@@ -21,14 +21,12 @@
 
         <activity
             android:name="com.android.locusideas.auth.AuthActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
         </activity>
 
         <activity
             android:name="com.android.locusideas.auth.signIn.SignInActivity"
-            android:label="@string/title_activity_sign_in"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_sign_in">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.locusideas.auth.AuthActivity" />
@@ -36,21 +34,18 @@
 
         <activity
             android:name="com.android.locusideas.auth.signUp.SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_sign_up">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.android.locusideas.auth.AuthActivity" />
         </activity>
 
         <activity
-            android:name="com.android.locusideas.home.MainShellActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="com.android.locusideas.home.MainShellActivity">
         </activity>
 
         <activity
-            android:name="com.android.locusideas.SplashScreen.SplashScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="com.android.locusideas.SplashScreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,8 +62,7 @@
         </activity>
 
         <activity
-            android:name="com.android.locusideas.home.projects.project.ProjectActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="com.android.locusideas.home.projects.project.ProjectActivity">
         </activity>
 
     </application>
