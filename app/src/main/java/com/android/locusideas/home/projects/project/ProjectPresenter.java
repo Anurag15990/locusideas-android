@@ -1,13 +1,12 @@
 package com.android.locusideas.home.projects.project;
 
 import com.android.locusideas.core.data.models.ApiError;
+import com.android.locusideas.core.utils.ActivityUtils;
 import com.android.locusideas.core.utils.ApiCallback;
 import com.android.locusideas.core.utils.mvp.BasePresenter;
-import com.android.locusideas.home.projects.data.ProjectsDataManager;
 import com.android.locusideas.home.projects.data.ProjectsDataSource;
 import com.android.locusideas.home.projects.models.ProjectMedia;
 import com.android.locusideas.home.projects.models.ProjectMediaResponse;
-
 import java.util.List;
 
 /**
@@ -41,6 +40,14 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
 
     public void onError(String message){
         view.showError(message);
+    }
+
+    public void onAppBarStateChanged(int state){
+        if(state == ActivityUtils.AppBarOffsetChangedListener.COLLAPSED){
+            view.onToolbarCollapsed();
+        } else if(state == ActivityUtils.AppBarOffsetChangedListener.EXPANDED){
+            view.onToolbarExpanded();
+        }
     }
 
     private static class LoadProjectMediaCallback implements ApiCallback<ProjectMediaResponse> {

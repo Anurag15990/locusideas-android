@@ -2,6 +2,7 @@ package com.android.locusideas.home.projects.project;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.core.ui.BaseActivity;
-import com.android.locusideas.core.utils.FontUtils;
+import com.android.locusideas.core.utils.ActivityUtils;
 import com.android.locusideas.home.projects.di.ProjectsComponent;
 import com.android.locusideas.home.projects.models.Project;
 import com.android.locusideas.home.projects.models.ProjectMedia;
@@ -42,11 +43,16 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
 
+    @BindView(R.id.app_bar)
+    AppBarLayout appBarLayout;
+
     ProjectComponent projectComponent;
     //TODO create component manager
     ProjectsComponent projectsComponent;
     LocusApplication locusApplication;
     ProjectMediaAdapter projectMediaAdapter;
+    OnStateChangeListenerImpl onStateChangeListener;
+    ActivityUtils.AppBarOffsetChangedListener appBarOffsetChangedListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,20 +74,30 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
         initializeToolbar();
         initializeMediaList();
         presenter.onCreate();
+        onStateChangeListener = new OnStateChangeListenerImpl(presenter);
+        appBarOffsetChangedListener = new ActivityUtils.AppBarOffsetChangedListener(onStateChangeListener);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+        appBarLayout.addOnOffsetChangedListener(appBarOffsetChangedListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        appBarLayout.removeOnOffsetChangedListener(appBarOffsetChangedListener);
     }
 
     private void initializeToolbar(){
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        collapsingToolbar.setExpandedTitleTypeface(FontUtils.getTypeface(getAssets(),
-                getResources().getString(R.string.font_montserrat_semibold)));
+//        collapsingToolbar.setExpandedTitleTypeface(FontUtils.getTypeface(getAssets(),
+//                getResources().getString(R.string.font_montserrat_semibold)));
+
     }
 
     private void initializeMediaList(){
@@ -107,6 +123,7 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     @Override
     public void updateProjectView(Project project){
         collapsingToolbar.setTitle(project.getTitle());
+        //collapsingToolbar.setTitleEnabled(false);
         loadProjectPoster(project.getMedias().getInitial().get(0).getMedia().getUrl());
     }
 
@@ -124,5 +141,30 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     public void showError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onToolbarCollapsed() {
+    }
+
+    @Override
+    public void onToolbarExpanded() {
+
+    }
+
+    private static class OnStateChangeListenerImpl implements ActivityUtils.AppBarOffsetChangedListener.OnStateChangedListener{
+
+        private ProjectPresenter projectPresenter;
+
+        public OnStateChangeListenerImpl(ProjectPresenter projectPresenter){
+            this.projectPresenter = projectPresenter;
+        }
+
+        @Override
+        public void onStateChanged(int state) {
+            projectPresenter.onAppBarStateChanged(state);
+        }
+
+    }
+
 
 }
