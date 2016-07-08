@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -59,9 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:src="@drawable/ic_share_white_24dp"
-                    android:layout_marginRight="@dimen/spacing_16dp"
-                    android:visibility="invisible"
-                    />
+                    android:layout_marginRight="@dimen/spacing_16dp"/>
 
                 <ImageView
                     android:id="@+id/project_owner_avatar"
@@ -84,5 +81,15 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/project_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_project_like_white_24dp"
+        app:layout_anchor="@id/project_images"
+        app:layout_anchorGravity="end|bottom|right"
+        app:layout_behavior="com.android.locusideas.home.projects.project.ProjectLikeFABBehaviour"/>
 
 </android.support.design.widget.CoordinatorLayout>
