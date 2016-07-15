@@ -29,7 +29,7 @@ public class ServiceGenerator {
 
             sInstance = new Retrofit
                     .Builder()
-                    .baseUrl(BuildConfig.API_URL)
+                    .baseUrl(BuildConfig.BASE_API_URL)
                     .client(httpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
