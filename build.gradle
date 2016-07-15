@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -16,6 +16,42 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+    }
+
+    ext {
+        config = [
+                applicationId : "com.android.locusideas",
+                compileSdkVersion : 23,
+                buildToolsVersion : "23.0.3",
+                minSdkVersion : 15,
+                targetSdkVersion : 23,
+                versionCode : 1,
+                versionName : "1.0.0",
+
+                // Where you should set up things like: applicationId, versionCode, versionName, compileSdkVersion, buildToolsVersion, etc
+
+                //staging
+                stagingBaseApiUrl :  "http://api-staging-c3po.locusideas.com",
+                stagingAppName :  "Loci stage",
+                stagingTwitterKey :"NHvVcFgKeWsCiev1YeCQHLQsd",
+                stagingTwitterSecret :"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C",
+                stagingApplicationId : "com.android.locusideas.stage",
+
+                //development
+                developmentBaseApiUrl : "http://api-staging-c3po.locusideas.com",
+                developmentAppName :  "Loci dev",
+                developmentTwitterKey :"NHvVcFgKeWsCiev1YeCQHLQsd",
+                developmentTwitterSecret :"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C",
+                developmentApplicationId : "com.android.locusideas.development",
+
+                //production
+                productionBaseApiUrl :  "http://api-staging-c3po.locusideas.com",
+                productionAppName :  "Loci",
+                productionTwitterKey :"NHvVcFgKeWsCiev1YeCQHLQsd",
+                productionTwitterSecret :"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C",
+                productionApplicationId : "com.android.locusideas",
+
+        ]
     }
 }
 
