@@ -69,17 +69,17 @@ android {
         staging {
             applicationId config.stagingApplicationId
 
-            buildConfigField "String", "BASE_API_URL", config.stagingBaseApiUrl
-            buildConfigField "String", "TWITTER_KEY", config.stagingTwitterKey
-            buildConfigField "String", "TWITTER_SECRET", config.stagingTwitterSecret
+            buildConfigField "String", "BASE_API_URL", "\"" + config.stagingBaseApiUrl + "\""
+            buildConfigField "String", "TWITTER_KEY", "\"" + config.stagingTwitterKey + "\""
+            buildConfigField "String", "TWITTER_SECRET", "\"" + config.stagingTwitterSecret + "\""
         }
 
         development {
             applicationId config.developmentApplicationId
 
-            buildConfigField "String", "BASE_API_URL", config.developmentBaseApiUrl
-            buildConfigField "String", "TWITTER_KEY", config.developmentTwitterKey
-            buildConfigField "String", "TWITTER_SECRET", config.developmentTwitterSecret
+            buildConfigField "String", "BASE_API_URL", "\"" + config.developmentBaseApiUrl + "\""
+            buildConfigField "String", "TWITTER_KEY", "\"" + config.developmentTwitterKey + "\""
+            buildConfigField "String", "TWITTER_SECRET", "\"" + config.developmentTwitterSecret + "\""
         }
     }
 }
