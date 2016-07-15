@@ -34,3 +34,6 @@ captures/
 *.iml
 .idea
 .idea/*
+
+#key properties
+keystore.properties
