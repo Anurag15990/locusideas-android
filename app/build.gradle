@@ -64,6 +64,8 @@ android {
             buildConfigField "String", "BASE_API_URL", "\"" + config.productionBaseApiUrl + "\""
             buildConfigField "String", "TWITTER_KEY", "\"" + config.productionTwitterKey + "\""
             buildConfigField "String", "TWITTER_SECRET", "\"" + config.productionTwitterSecret + "\""
+
+            resValue "string", "app_name", config.productionAppName
         }
 
         staging {
@@ -72,6 +74,8 @@ android {
             buildConfigField "String", "BASE_API_URL", "\"" + config.stagingBaseApiUrl + "\""
             buildConfigField "String", "TWITTER_KEY", "\"" + config.stagingTwitterKey + "\""
             buildConfigField "String", "TWITTER_SECRET", "\"" + config.stagingTwitterSecret + "\""
+
+            resValue "string", "app_name", config.stagingAppName
         }
 
         development {
@@ -80,6 +84,8 @@ android {
             buildConfigField "String", "BASE_API_URL", "\"" + config.developmentBaseApiUrl + "\""
             buildConfigField "String", "TWITTER_KEY", "\"" + config.developmentTwitterKey + "\""
             buildConfigField "String", "TWITTER_SECRET", "\"" + config.developmentTwitterSecret + "\""
+
+            resValue "string", "app_name", config.developmentAppName
         }
     }
 }
