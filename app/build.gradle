@@ -18,35 +18,60 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.locusideas.locusideas"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
     }
+
     buildTypes {
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_URL", "\"http://api-staging-c3po.locusideas.com\""
-            buildConfigField "String", "TWITTER_KEY", "\"NHvVcFgKeWsCiev1YeCQHLQsd\""
-            buildConfigField "String", "TWITTER_SECRET", "\"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C\""
+            applicationIdSuffix ".debug"
         }
 
         release {
             minifyEnabled true
-            buildConfigField "String", "API_URL", "\"http://api-staging-c3po.locusideas.com\""
-            buildConfigField "String", "TWITTER_KEY", "\"NHvVcFgKeWsCiev1YeCQHLQsd\""
-            buildConfigField "String", "TWITTER_SECRET", "\"RESkM8po4CKbkPGbncvOQcLODdOKXkbRyaTFtdThjYNFhKL38C\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
+
+    productFlavors{
+        production{
+            applicationId config.productionApplicationId
+
+            buildConfigField "String", "BASE_API_URL", "\"" + config.productionBaseApiUrl + "\""
+            buildConfigField "String", "TWITTER_KEY", "\"" + config.productionTwitterKey + "\""
+            buildConfigField "String", "TWITTER_SECRET", "\"" + config.productionTwitterSecret + "\""
+        }
+
+        staging{
+            applicationId config.stagingApplicationId
+
+            buildConfigField "String", "BASE_API_URL", config.stagingBaseApiUrl
+            buildConfigField "String", "TWITTER_KEY", config.stagingTwitterKey
+            buildConfigField "String", "TWITTER_SECRET", config.stagingTwitterSecret
+        }
+
+        development{
+            applicationId config.developmentApplicationId
+
+            buildConfigField "String", "BASE_API_URL", config.developmentBaseApiUrl
+            buildConfigField "String", "TWITTER_KEY", config.developmentTwitterKey
+            buildConfigField "String", "TWITTER_SECRET", config.developmentTwitterSecret
+        }
+    }
+
 }
 
 dependencies {
