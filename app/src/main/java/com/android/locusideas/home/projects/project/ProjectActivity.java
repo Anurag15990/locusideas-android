@@ -131,7 +131,7 @@ public class ProjectActivity extends BaseActivity<ProjectView, ProjectPresenter>
     public void updateProjectView(Project project){
         collapsingToolbar.setTitle(project.getTitle());
         //collapsingToolbar.setTitleEnabled(false);
-        Glide.with(this).load(project.getOwner().getPicture().getUrl()).into(projectOwnerAvatarCollapsed);
+        Glide.with(this).load(project.getOwner().getPicture().getUrl()).dontAnimate().into(projectOwnerAvatarCollapsed);
         loadProjectPoster(project.getMedias().getInitial().get(0).getMedia().getUrl());
     }
 
