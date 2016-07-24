@@ -1,4 +1,4 @@
-package com.android.locusideas.core.data.models.responses;
+package com.android.locusideas.core.data.models.response;
 
 /**
  * Created by anurag on 4/29/16.

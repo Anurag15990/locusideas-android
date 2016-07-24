@@ -1,5 +1,6 @@
 package com.android.locusideas.auth.signIn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.auth.signIn.injection.DaggerSignInComponent;
 import com.android.locusideas.auth.signIn.injection.SignInModule;
@@ -16,6 +18,7 @@ import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;
 import com.android.locusideas.core.ui.widgets.ButtonPlus;
+import com.android.locusideas.home.MainShellActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -42,6 +45,9 @@ public class SignInFragment extends Fragment implements SignInContract.View{
     ButtonPlus mSignInButton;
     private CallbackManager callbackManager;
     private AuthComponent mAuthComponent;
+
+    //TODO implemnt better loader
+    ProgressDialog pd;
 
     @Nullable
     @Override
@@ -173,4 +179,23 @@ public class SignInFragment extends Fragment implements SignInContract.View{
     public boolean isActive() {
         return isAdded();
     }
+
+    @Override
+    public void showLoader(){
+        pd = ProgressDialog.show(getActivity(), "Signing", "Please wait", true);
+    }
+
+    @Override
+    public void hideLoader(){
+        pd.dismiss();
+    }
+
+    @Override
+    public void navigateToMainActivity(){
+        Intent mainActivityIntent = new Intent(getActivity().getApplicationContext(), MainShellActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(mainActivityIntent);
+        getActivity().finish();
+    }
+
 }

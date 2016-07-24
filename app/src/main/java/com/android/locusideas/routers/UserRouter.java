@@ -5,7 +5,7 @@ import com.android.locusideas.core.data.models.requests.FollowRequest;
 import com.android.locusideas.core.data.models.requests.LoginRequest;
 import com.android.locusideas.core.data.models.requests.RegisterRequest;
 import com.android.locusideas.core.data.models.requests.UnFollowRequest;
-import com.android.locusideas.core.data.models.responses.TokenResponse;
+import com.android.locusideas.core.data.models.response.TokenResponse;
 import com.android.locusideas.models.user.User;
 
 import java.util.List;

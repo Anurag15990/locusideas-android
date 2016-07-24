@@ -5,6 +5,7 @@ package com.android.locusideas.core.utils;
  */
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -28,4 +29,41 @@ public class ActivityUtils {
         transaction.commit();
     }
 
+    public static class AppBarOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener{
+        int currentState;
+
+        public static final int EXPANDED = 1;
+        public static final int COLLAPSED = 0;
+        public static final int IDLE = -1;
+        final OnStateChangedListener onStateChangedListener;
+
+        public AppBarOffsetChangedListener(OnStateChangedListener onStateChangedListener){
+            currentState = IDLE;
+            this.onStateChangedListener = onStateChangedListener;
+        }
+
+        @Override
+        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+            if (verticalOffset == 0) {
+                if (currentState != EXPANDED) {
+                    onStateChangedListener.onStateChanged(EXPANDED);
+                }
+                currentState = EXPANDED;
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (currentState != COLLAPSED) {
+                    onStateChangedListener.onStateChanged(COLLAPSED);
+                }
+                currentState = COLLAPSED;
+            } else {
+                if (currentState != IDLE) {
+                    onStateChangedListener.onStateChanged(IDLE);
+                }
+                currentState = IDLE;
+            }
+        }
+
+        public interface OnStateChangedListener{
+            void onStateChanged(int state);
+        }
+    }
 }

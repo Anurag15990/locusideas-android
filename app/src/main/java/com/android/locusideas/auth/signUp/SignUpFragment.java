@@ -1,5 +1,7 @@
 package com.android.locusideas.auth.signUp;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +20,7 @@ import com.android.locusideas.auth.signUp.injection.SignUpModule;
 import com.android.locusideas.core.data.auth.injection.AuthComponent;
 import com.android.locusideas.core.data.auth.injection.AuthModule;
 import com.android.locusideas.core.data.auth.injection.DaggerAuthComponent;
+import com.android.locusideas.home.MainShellActivity;
 import com.locusideas.locusideas.R;
 
 import javax.inject.Inject;
@@ -42,6 +45,8 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
     @Inject SignUpContract.Presenter mPresenter;
 
     private AuthComponent mAuthComponent;
+
+    ProgressDialog pd;
 
     @Nullable
     @Override
@@ -129,4 +134,21 @@ public class SignUpFragment extends Fragment implements SignUpContract.View {
         return isAdded();
     }
 
+    @Override
+    public void showLoader() {
+        pd = ProgressDialog.show(getActivity(), "Signup in progress", "Please wait", true);
+    }
+
+    @Override
+    public void hideLoader() {
+        pd.dismiss();
+    }
+
+    @Override
+    public void navigateToMainActivity() {
+        Intent mainActivityIntent = new Intent(getActivity().getApplicationContext(), MainShellActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().startActivity(mainActivityIntent);
+        getActivity().finish();
+    }
 }

@@ -20,6 +20,7 @@ public class SignUpPresenter implements SignUpContract.Presenter {
 
     @Override
     public void onClickSignUp(String email, String password) {
+        mView.showLoader();
         mAuthDataManager.onSignUpWithEmailId(email, password);
     }
 
@@ -29,10 +30,12 @@ public class SignUpPresenter implements SignUpContract.Presenter {
     }
 
     public void onSignUpSuccess(){
-        Log.d("Presenter", "Signup successful");
+        mView.hideLoader();
+        mView.navigateToMainActivity();
     }
 
     public void onSignUpFailure(String errorMessage){
+        mView.hideLoader();
         Log.e("Presenter", errorMessage);
     }
 }

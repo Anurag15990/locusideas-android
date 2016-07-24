@@ -31,21 +31,26 @@ public class SignInPresenter implements SignInContract.Presenter{
 
     @Override
     public void onSignIn(String emailId, String password) {
+        mSignInView.showLoader();
         mAuthDataManager.onSignInWithEmailId(emailId, password);
     }
 
     @Override
     public void onSignInViaFacebook(AccessToken accessToken, String fbId){
+        mSignInView.showLoader();
         mAuthDataManager.onSignInViaFacebook(accessToken, fbId);
     }
 
     @Override
     public void onSignInSuccess() {
+        mSignInView.hideLoader();
+        mSignInView.navigateToMainActivity();
         Log.d("Presenter", "Signin successful");
     }
 
     @Override
     public void onSignInFailure(String errorMessage) {
+        mSignInView.hideLoader();
         Log.e("Presenter", errorMessage);
     }
 }

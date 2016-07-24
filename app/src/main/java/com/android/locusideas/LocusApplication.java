@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.core.utils.mvp.PresenterManager;
+import com.android.locusideas.home.projects.project.ProjectHolder;
 import com.facebook.FacebookSdk;
 import javax.inject.Inject;
 import dagger.Lazy;
@@ -21,6 +22,9 @@ public class LocusApplication extends Application {
 
     @Inject
     Lazy<PresenterManager> presenterManager;
+
+    @Inject
+    Lazy<ProjectHolder> projectHolder;
 
     @Override
     public void onCreate() {
@@ -51,6 +55,10 @@ public class LocusApplication extends Application {
 
     public PresenterManager getPresenterManager(){
         return presenterManager.get();
+    }
+
+    public ProjectHolder getProjectHolder(){
+        return projectHolder.get();
     }
 
 }

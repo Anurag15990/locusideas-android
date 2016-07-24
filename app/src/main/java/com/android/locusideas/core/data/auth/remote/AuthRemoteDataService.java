@@ -1,12 +1,13 @@
 package com.android.locusideas.core.data.auth.remote;
 
 import com.android.locusideas.core.data.auth.AuthDataContract;
-import com.android.locusideas.core.data.coreServices.UserService;
 import com.android.locusideas.core.data.models.ApiError;
 import com.android.locusideas.core.data.models.requests.FacebookAuthRequest;
 import com.android.locusideas.core.data.models.requests.LoginRequest;
 import com.android.locusideas.core.data.models.requests.RegisterRequest;
-import com.android.locusideas.core.data.models.responses.TokenResponse;
+import com.android.locusideas.core.data.models.response.TokenResponse;
+import com.android.locusideas.core.data.services.UserService;
+import com.android.locusideas.core.utils.SharedPreferencesManager;
 import com.android.locusideas.routers.ServiceGenerator;
 import com.facebook.AccessToken;
 import retrofit2.Call;
@@ -19,15 +20,17 @@ import retrofit2.Response;
 public class AuthRemoteDataService {
 
     AuthDataContract.Callbacks mAuthDataCallbacks;
+    SharedPreferencesManager sharedPreferencesManager;
 
-    public void setAuthDataCallbacks(AuthDataContract.Callbacks authDataCallbacks){
+    public void setAuthDataCallbacks(AuthDataContract.Callbacks authDataCallbacks, SharedPreferencesManager sharedPreferencesManager){
         mAuthDataCallbacks = authDataCallbacks;
+        this.sharedPreferencesManager = sharedPreferencesManager;
     }
 
     public void signInWithEmailId(String emailId, String password){
         LoginRequest loginRequest = new LoginRequest(emailId, password);
 
-        Call<TokenResponse> loginAuthCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance())
+        Call<TokenResponse> loginAuthCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance(sharedPreferencesManager))
                 .login(loginRequest);
 
         loginAuthCall.enqueue(new Callback<TokenResponse>() {
@@ -55,7 +58,7 @@ public class AuthRemoteDataService {
 
     public void signInViaFacebook(AccessToken accessToken, String fbId){
         FacebookAuthRequest facebookAuthRequest = new FacebookAuthRequest(accessToken, fbId);
-        Call<TokenResponse> facebookAuthCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance())
+        Call<TokenResponse> facebookAuthCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance(sharedPreferencesManager))
                 .facebookAuth(facebookAuthRequest);
 
         facebookAuthCall.enqueue(new retrofit2.Callback<TokenResponse>() {
@@ -74,7 +77,7 @@ public class AuthRemoteDataService {
 
     public void signUpWithEmailId(String emailId, String password) {
         RegisterRequest registerRequest = new RegisterRequest(emailId, password);
-        Call<TokenResponse> registerCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance())
+        Call<TokenResponse> registerCall = ServiceGenerator.createService(UserService.class, ServiceGenerator.getRetrofitInstance(sharedPreferencesManager))
                 .register(registerRequest);
 
         registerCall.enqueue(new Callback<TokenResponse>() {
