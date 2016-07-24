@@ -1,4 +1,4 @@
-package com.android.locusideas.home.designers.di;
+package com.android.locusideas.home.designers.injection;
 
 import com.android.locusideas.core.utils.injection.PerActivity;
 import com.android.locusideas.home.designers.DesignersPresenter;
