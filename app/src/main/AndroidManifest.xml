@@ -66,6 +66,8 @@
             android:theme="@style/AppTheme.FitSystemWindows">
         </activity>
 
+        <activity android:name="com.android.locusideas.home.designers.designerProfile.DesignerProfileActivity"></activity>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
