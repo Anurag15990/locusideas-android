@@ -62,6 +62,10 @@ android {
             signingConfig signingConfigs.releaseConfig
         }
     }
+    sourceSets{
+        main.res.srcDirs = ['src/main/res','src/main/res-home']
+    }
+
     productFlavors {
         production {
             applicationId config.productionApplicationId
