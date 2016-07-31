@@ -18,7 +18,11 @@
     <item name="primary_opacity" format="float" type="dimen">0.87</item>
     <item name="secondary_opacity" format="float" type="dimen">0.54</item>
     <item name="tertiary_opacity" format="float" type="dimen">0.38</item>
+    <dimen name="button_shadow">2.5dp</dimen>
 
     <dimen name="toolbar_icon_size">24dp</dimen>
+
+    <dimen name="designer_profile_toolbar_title_text_size">20sp</dimen>
+    <dimen name="button_radius">8dp</dimen>
 
 </resources>
