@@ -142,7 +142,8 @@
                         android:drawablePadding="@dimen/spacing_4dp"
                         android:drawableLeft="@drawable/ic_person_add_white_24dp"
                         android:layout_below="@+id/designer_profile_followers"
-                        android:background="@drawable/selector_button_green"/>
+                        android:clickable="true"
+                        android:background="@drawable/selector_button_primary_color"/>
 
                 </RelativeLayout>
 

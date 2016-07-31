@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.android.locusideas.LocusApplication;
 import com.android.locusideas.home.BaseHomeFragment;
+import com.android.locusideas.home.designers.designerProfile.DesignerProfileActivity;
 import com.android.locusideas.home.projects.di.DaggerProjectsComponent;
 import com.android.locusideas.home.projects.di.ProjectsComponent;
 import com.android.locusideas.home.projects.di.ProjectsModule;
@@ -124,7 +125,7 @@ public class ProjectsFragment extends BaseHomeFragment<ProjectsView, ProjectsPre
         @Override
         public void onItemClick(int itemPosition) {
             projectHolder.setProject(projectsAdapter.getItemAt(itemPosition));
-            Intent projectIntent = new Intent(appContext, ProjectActivity.class);
+            Intent projectIntent = new Intent(appContext, DesignerProfileActivity.class);
             appContext.startActivity(projectIntent);
         }
 
